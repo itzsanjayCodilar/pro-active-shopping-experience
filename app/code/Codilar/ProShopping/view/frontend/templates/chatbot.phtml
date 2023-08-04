@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Chatbot Pop-up</title>
+</head>
+<body>
+<button id="chatbot-button">Open Chatbot</button>
+
+<script type="text/javascript">
+    document.getElementById('chatbot-button').addEventListener('click', function () {
+        var message = "Hello! I am a simple chatbot. How can I assist you?";
+
+        // Open the pop-up window
+        var chatbotWindow = window.open('', '_blank', 'width=400,height=300');
+
+        // Write the message inside the pop-up window
+        chatbotWindow.document.write('<p>' + message + '</p>');
+
+        // Prevent the pop-up from navigating to a URL
+        chatbotWindow.location.href = 'about:blank';
+
+        // Optional: Focus the pop-up window when it's opened
+        chatbotWindow.focus();
+    });
+</script>
+</body>
+</html>
