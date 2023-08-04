@@ -1,0 +1,28 @@
+<?php
+/** @var \Codilar\ProShopping\Block\ProShopping $block */
+?>
+<div id="modal-content">
+    <?php echo $block->getContent(); ?>
+</div>
+
+<script>
+    require(['jquery', 'Magento_Ui/js/modal/modal'], function($, modal) {
+        // Wait for the DOM to be ready
+        $(document).ready(function() {
+            // Get the modal target element
+            var modalTarget = $('#modal-content');
+
+            // Initialize the modal
+            var options = {
+                type: 'popup',
+                responsive: true,
+                innerScroll: true,
+                buttons: []
+            };
+            var popup = modal(options, modalTarget);
+
+            // Open the modal on page load
+            modalTarget.modal('openModal');
+        });
+    });
+</script>
