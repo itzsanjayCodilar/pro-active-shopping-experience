@@ -182,9 +182,30 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
+        let url = "<?= $viewModel->getProductCategoryUrl() ?>";
+        let categoryId;
         jQuery('.category-link').on('click', function () {
-            var categoryId = $(this).data('category-id');
-            console.log('Clicked category ID:', categoryId);
+            // Get the data-category-id attribute value of the clicked element
+            categoryId = $(this).data('category-id');
+
+            console.log(url);
+            let products;
+            $.ajax({
+                url: url,
+                type: 'POST',
+                dataType: 'json',
+                data: { categoryId: categoryId },
+                success: function (response) {
+                    products = response.output;
+                    console.log(JSON.parse(products));
+                },
+                error: function (err) {
+                    console.log(err.Message)
+                }
+            });
         });
     });
+    //console.log(products.id);
+    // Attach a click event listener to all elements with the class "category-link"
+
 </script>
