@@ -70,8 +70,7 @@
 
 <div id="leftcontact" <?php if($this->popupposition() == 0) { echo "class=popup"; } else{ echo "class=popup-right"; }?>
      data-value="hide">
-<div id="bcontactForm" name="bMyform" class="block contactFormheader"
-     style="width:253px;border:solid 0.1px;border-radius:5px;float:left;padding-left:0px;background:white;padding:10px;">
+<div id="bcontactForm" name="bMyform" class="block contactFormheader">
 
     <div class="category-container">
         <?php foreach ($categoryList->getItems() as $category) { ?>
@@ -108,7 +107,6 @@
     .share_box{
        position:fixed;
         width:40px;
-
         left: 0px;
         z-index: 1000;
         top: 200px;
@@ -117,7 +115,6 @@
     .share_box-right{
        position:fixed;
         width:40px;
-
         right: 0px;
         z-index: 1000;
         top: 200px;
@@ -130,7 +127,6 @@
     .popup{
        position:fixed;
         width:40px;
-
         left: 5px;
         z-index: 1000;
         top: 100px;
@@ -140,7 +136,6 @@
     .popup-right{
        position:fixed;
         width:40px;
-
         right: 5px;
         z-index: 1000;
         top: 100px;
@@ -149,7 +144,6 @@
     }
     .contactFormheader{
         width: 253px;
-        border: solid 0.1px;
         border-radius: 5px;
         float: left;
         padding-left: 0px;
@@ -171,10 +165,16 @@
     }
 
     .category-link {
-        background-color: #656c7d;
+        background-color: #845BB3;
         color: white;
         padding: 10px;
         text-align: center;
+        box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+        border-radius: 5px;
+    }
+
+    #bcontactForm{
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
 
 </style>
