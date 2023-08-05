@@ -10,14 +10,5 @@
             <block class="Codilar\ProShopping\Block\Contactblock" name="popup" after="-" template="Codilar_ProShopping::popup.phtml"/>
         </referenceBlock>
         <referenceBlock name="contact-us-link" remove="true"/>
-        <referenceBlock name="footer_links" >
-            <block class="Magento\Framework\View\Element\Html\Link\Current" name="contact-us-link2">
-                <arguments>
-                    <argument name="label" xsi:type="string">Contact Us</argument>
-                    <!--<argument name="path" xsi:type="string">proshopping/front/index</argument> -->
-                    <argument name="path" xsi:type="helper" helper="Codilar\ProShopping\Helper\Data::getFrontName"/>
-                </arguments>
-            </block>
-        </referenceBlock>
     </body>
 </page>
