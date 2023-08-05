@@ -1,6 +1,6 @@
 <?php
 
-namespace Codilar\ProShopping\Model\Contact\Source;
+namespace Codilar\ProShopping\Model\ProShopping\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
 
