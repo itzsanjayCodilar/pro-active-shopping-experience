@@ -10,7 +10,7 @@ use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\NotFoundException;
 
-class GetProductsList implements HttpPostActionInterface
+class InitialProductRefer implements HttpPostActionInterface
 {
     public function __construct(
         private RequestInterface $request,
@@ -41,7 +41,6 @@ class GetProductsList implements HttpPostActionInterface
             ];
         }
         $jsonResult = json_encode($productArr);
-        $logger->info("json value " . $jsonResult);
         $result = $this->jsonFactory->create();
         $result->setData(['output' => $jsonResult]);
         return $result;
