@@ -45,4 +45,9 @@ class ProShop implements ArgumentInterface
 
         return $categoryList;
     }
+
+    public function getProductCategoryUrl()
+    {
+        return "pro_shopping/Recommend/getproductslist";
+    }
 }
