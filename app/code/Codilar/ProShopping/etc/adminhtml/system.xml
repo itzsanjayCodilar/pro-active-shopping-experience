@@ -19,7 +19,7 @@
 
         <section id="proshopping" translate="label" type="text" sortOrder="1000" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>ProShopping</label>
-            <tab>Pro-Active Shopping</tab>
+            <tab>pro_shopping</tab>
             <resource>Codilar_ProShopping::proshopping</resource>
             <group id="active_display" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Contact Page Settings</label>
