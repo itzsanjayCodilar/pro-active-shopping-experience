@@ -1,8 +1,5 @@
 <?php
-/**
- * Copyright © 2015 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
+
 namespace FME\Contactus\Model\Contact\Source;
 
 use Magento\Framework\Data\OptionSourceInterface;
@@ -12,17 +9,17 @@ use Magento\Framework\Data\OptionSourceInterface;
  */
 class Status implements OptionSourceInterface
 {
-    
+
     /**
      * Get options
      *
      * @return array
      */
-    public function toOptionArray()
+    public function toOptionArray(): array
     {
-        
+
         $availableOptions = ['1' => 'Not Replied', '0' => 'Replied'];
-        
+
         $options = [];
         foreach ($availableOptions as $key => $label) {
             $options[] = [

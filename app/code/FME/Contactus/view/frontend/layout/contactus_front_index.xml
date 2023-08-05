@@ -5,20 +5,13 @@
  * See COPYING.txt for license details.
  */
 -->
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceContainer name="content">
             <block class="FME\Contactus\Block\Contactblock" name="contactus" template="FME_Contactus::contact.phtml">
-
             </block>
-
         </referenceContainer>
         <referenceBlock name="popup" remove="true"/>
     </body>
-
-   <!-- <head>
-		<script src="https://www.google.com/recaptcha/api.js" src_type="url" />
-	</head>
--->
 </page>
