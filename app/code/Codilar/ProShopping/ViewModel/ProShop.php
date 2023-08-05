@@ -4,8 +4,9 @@ namespace Codilar\ProShopping\ViewModel;
 
 use Exception;
 use Magento\Catalog\Api\CategoryListInterface;
-use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Catalog\Api\Data\CategorySearchResultsInterface;
+use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
+use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 
 class ProShop implements ArgumentInterface
@@ -20,12 +21,19 @@ class ProShop implements ArgumentInterface
      */
     private $categoryList;
 
+    /**
+     * @var CollectionFactory
+     */
+    private $productRepository;
+
     public function __construct(
         CategoryListInterface $categoryList,
-        SearchCriteriaBuilder $searchCriteriaBuilder
+        SearchCriteriaBuilder $searchCriteriaBuilder,
+        CollectionFactory $productRepository
     ) {
         $this->categoryList = $categoryList;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
+        $this->productRepository = $productRepository;
     }
 
     /**
@@ -49,5 +57,27 @@ class ProShop implements ArgumentInterface
     public function getProductCategoryUrl()
     {
         return "pro_shopping/Recommend/InitialProductRefer";
+    }
+
+    public function getRecommendedProduct()
+    {
+        $collection = $this->productRepository->create();
+        $collection->addAttributeToSelect(['name', 'price', 'image']); // Select only Name, Price, and Image attributes
+        $products = $collection->setPageSize(3); // Fetching only 3 products
+
+        $data = [];
+        foreach ($products as $product) {
+            $name = $product->getName(); // Get Name attribute
+            $price = $product->getPrice();
+            $image = $product->getImage();
+
+            // Add product data to the $data array
+            $data[] = [
+                'name' => $name,
+                'price' => $price,
+                'image' => $image
+            ];
+        }
+        return $data;
     }
 }

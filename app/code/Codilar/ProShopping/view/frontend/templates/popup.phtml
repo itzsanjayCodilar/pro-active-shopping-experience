@@ -4,6 +4,7 @@
     /** @var \Codilar\ProShopping\ViewModel\ProShop $viewModel */
     $viewModel = $block->getData('viewModel');
     $categoryList = $viewModel->getAllSystemCategory();
+    $products = $viewModel->getRecommendedProduct();
 
     if($this->isPopupEnabled() && $this->isContactEnabled()){
 ?>
@@ -71,6 +72,12 @@
 <div id="leftcontact" <?php if($this->popupposition() == 0) { echo "class=popup"; } else{ echo "class=popup-right"; }?>
      data-value="hide">
 <div id="bcontactForm" name="bMyform" class="block contactFormheader">
+    
+    <div class="category-container">
+        <?php foreach ($products as $single) { ?>
+                <p class="category-link"><?php echo $single['name'] ?></p>
+        <?php } ?>
+    </div>
 
     <div class="category-container">
         <?php foreach ($categoryList->getItems() as $category) { ?>
