@@ -27,6 +27,7 @@ class InitialProductRefer implements HttpPostActionInterface
      */
     public function execute()
     {
+        $baseUrl = "http://hackathon.local/pub/media/catalog/product/";
         $id = $this->request->getParam('categoryId');
         $productCollection = $this->collectionFactory->create();
         $productCollection->addAttributeToSelect('*');
@@ -37,7 +38,8 @@ class InitialProductRefer implements HttpPostActionInterface
             $productArr[] = [
                 'id' => $product->getId(),
                 "sku" => $product->getSku(),
-                "image" => $product->getImage()
+                "image" => $baseUrl . $product->getImage(),
+                "price" => $product->getPrice()
             ];
         }
         $jsonResult = json_encode($productArr);

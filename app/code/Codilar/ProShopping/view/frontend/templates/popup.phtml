@@ -79,6 +79,8 @@
             <?php } ?>
         <?php } ?>
     </div>
+    <!-- New div to display products -->
+    <div id="product-container"></div>
 
 </div>
 </div>
@@ -176,6 +178,38 @@
     #bcontactForm{
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
+    #product-container {
+        border: 1px solid #ccc; /* Border style */
+        padding: 10px; /* Padding around the content */
+        margin-top: 20px; /* Adjust margin to create space between categories and products */
+        background-color: #f9f9f9; /* Background color */
+        max-width: 500px; /* Set a maximum width to limit the width of the box */
+        margin-left: auto; /* Center the box horizontally */
+        margin-right: auto; /* Center the box horizontally */
+    }
+
+    /* Style for individual product items inside the container */
+    .product-item {
+        display: flex;
+        align-items: center;
+        padding: 5px;
+        border-bottom: 1px solid #ccc; /* Add a border between each product */
+    }
+
+    .product-item img {
+        width: 50px; /* Set a width for the product image */
+        height: 50px; /* Set a height for the product image */
+        object-fit: cover; /* Ensure the image maintains its aspect ratio */
+        margin-right: 10px; /* Add some space between the image and product details */
+    }
+
+    .product-item h3 {
+        margin: 0; /* Remove margin to avoid extra spacing */
+    }
+
+    .product-item p {
+        margin: 0; /* Remove margin to avoid extra spacing */
+    }
 
 </style>
 
@@ -188,7 +222,6 @@
             // Get the data-category-id attribute value of the clicked element
             categoryId = $(this).data('category-id');
 
-            console.log(url);
             let products;
             $.ajax({
                 url: url,
@@ -196,16 +229,34 @@
                 dataType: 'json',
                 data: { categoryId: categoryId },
                 success: function (response) {
-                    products = response.output;
-                    console.log(JSON.parse(products));
+                    products = JSON.parse(response.output);
+                    // Call function to display products in the new div
+                    displayProducts(products);
                 },
                 error: function (err) {
-                    console.log(err.Message)
+                    console.log(err.Message);
                 }
             });
         });
-    });
-    //console.log(products.id);
-    // Attach a click event listener to all elements with the class "category-link"
 
+        function displayProducts(products) {
+            // Get the new div where you want to display the products
+            let productContainer = $('#product-container');
+            // Clear any existing content in the container
+            productContainer.empty();
+
+            // Loop through each product and generate HTML
+            products.forEach(function (product) {
+                let productHTML = `
+                    <div class="product-item">
+                        <img src="${product.image}" alt="${product.sku}" />
+                        <h3>${product.sku}</h3>
+                        <p>Price: ${product.price}</p>
+                    </div>
+                `;
+                // Append the product HTML to the container
+                productContainer.append(productHTML);
+            });
+        }
+    });
 </script>
