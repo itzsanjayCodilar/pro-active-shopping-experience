@@ -7,7 +7,7 @@ use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Store\Model\Information;
 
-class Contactblock extends Template
+class ShoppingBlock extends Template
 {
     /**
      * @var Information
@@ -38,7 +38,7 @@ class Contactblock extends Template
     }
 
     /**
-     * @return $this|Contactblock
+     * @return $this|ShoppingBlock
      */
     protected function _prepareLayout()
     {

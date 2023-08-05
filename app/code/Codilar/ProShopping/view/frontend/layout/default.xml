@@ -7,7 +7,7 @@
 	</head>
     <body>
         <referenceBlock name="after.body.start">
-            <block class="Codilar\ProShopping\Block\Contactblock" name="popup" after="-" template="Codilar_ProShopping::popup.phtml">
+            <block class="Codilar\ProShopping\Block\ShoppingBlock" name="popup" after="-" template="Codilar_ProShopping::popup.phtml">
                 <arguments>
                     <argument name="viewModel" xsi:type="object">Codilar\ProShopping\ViewModel\ProShop</argument>
                 </arguments>
