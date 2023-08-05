@@ -2,8 +2,6 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
 	<head>
 		<css src="Codilar_ProShopping::css/codilar_proshopping.css" />
-		<!--<script src="Codilar_ProShopping::js/proshopping.js" /> -->
-		<script src="https://www.google.com/recaptcha/api.js" src_type="url" />
 	</head>
     <body>
         <referenceBlock name="after.body.start">

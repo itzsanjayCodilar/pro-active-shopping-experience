@@ -3,7 +3,7 @@
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Codilar\ProShopping\Model\Contact\Source;
+namespace Codilar\ProShopping\Model\ProShopping\Source;
 
 use Magento\Cms\Model\Block;
 use Magento\Framework\Data\OptionSourceInterface;

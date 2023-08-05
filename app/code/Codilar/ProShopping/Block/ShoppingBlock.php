@@ -45,16 +45,16 @@ class ShoppingBlock extends Template
         parent::_prepareLayout();
         if ($this->getUrl(
             '*/*/*',
-                [
+            [
                     '_current' => true,
                     '_use_rewrite' => true
-                ]
-            ) == $this->getUrl(
-                'ProShopping/front/index',
-                [
+            ]
+        ) == $this->getUrl(
+            'ProShopping/front/index',
+            [
                     '_secure' => true
-                ]
-            )
+            ]
+        )
         ) {
             $this->pageConfig->getTitle()->set($this->_mymoduleHelper->metatittle());
             $this->pageConfig->setKeywords($this->_mymoduleHelper->metakeyword());
@@ -84,7 +84,7 @@ class ShoppingBlock extends Template
      */
     public function isPopupEnabled()
     {
-         return $this->_mymoduleHelper->isPopupEnabled();
+        return $this->_mymoduleHelper->isPopupEnabled();
     }
 
     /**
@@ -92,6 +92,6 @@ class ShoppingBlock extends Template
      */
     public function popupposition()
     {
-         return $this->_mymoduleHelper->popupposition();
+        return $this->_mymoduleHelper->popupposition();
     }
 }

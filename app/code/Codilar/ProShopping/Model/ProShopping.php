@@ -4,7 +4,7 @@ namespace Codilar\ProShopping\Model;
 
 use Magento\Framework\Model\AbstractModel;
 
-class Contact extends AbstractModel
+class ProShopping extends AbstractModel
 {
     /**
      * Statuses
