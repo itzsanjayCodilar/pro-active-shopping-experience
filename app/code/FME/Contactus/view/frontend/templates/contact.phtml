@@ -14,7 +14,7 @@ function geocode($address){
     // decode the json
   $resp = json_decode($resp_json, true);
 
-    // response status will be 'OK', if able to geocode given address 
+    // response status will be 'OK', if able to geocode given address
   if($resp['status']=='OK'){
 
         // get the important data
@@ -26,12 +26,12 @@ function geocode($address){
     if($lati && $longi && $formatted_address){
 
             // put the data in the array
-      $data_arr = array();            
+      $data_arr = array();
 
       array_push(
-        $data_arr, 
-        $lati, 
-        $longi, 
+        $data_arr,
+        $lati,
+        $longi,
         $formatted_address
         );
 
@@ -71,10 +71,10 @@ else{
      // $check_map = 	$this->isMapEnabled();
 
 ?>
-<script 
+<script
 src="https://maps.googleapis.com/maps/api/js?key=<?php echo $this->getmapkey(); ?> ">
 </script>
-<?php 
+<?php
 $om = \Magento\Framework\App\ObjectManager::getInstance();
 $obj = $om->get('Magento\Framework\HTTP\PhpEnvironment\RemoteAddress');
 $ip =  $obj->getRemoteAddress();
@@ -126,12 +126,12 @@ $country = $xml->geoplugin_countryName ;
           $( document ).ready(function() {
 
            initialize();
-            		//google.maps.event.addDomListener(window, 'load', initialize);  
+            		//google.maps.event.addDomListener(window, 'load', initialize);
               });
 
 
         });
-    
+
     function initialize() {
 
     	var exists = document.getElementById("map");
@@ -141,14 +141,14 @@ $country = $xml->geoplugin_countryName ;
          else{
          		 	var long = <?php echo $longitude; ?>//73.0373642;
       			var lat = <?php echo $latitude; ?>//33.4819688;
-      		var myLatlng = new google.maps.LatLng(lat, long); // Change your location Latitude and Longitude 
+      		var myLatlng = new google.maps.LatLng(lat, long); // Change your location Latitude and Longitude
       		var mapOptions = {
             zoom: 14,
             center: myLatlng
           }
           var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
-      	// Disabled Map Scroll in Contact Page 
+      	// Disabled Map Scroll in Contact Page
         map.setOptions({'scrollwheel': false});
 
       	// Black and White style for Google Map
@@ -156,7 +156,7 @@ $country = $xml->geoplugin_countryName ;
         var infowindow = new google.maps.InfoWindow({
           content: contentString
         })
-      	// Google Map Maker 
+      	// Google Map Maker
         var marker = new google.maps.Marker({
           position: myLatlng,
           map: map,
@@ -249,7 +249,7 @@ $country = $xml->geoplugin_countryName ;
     margin-top: -60px;
      z-index: -1;
     position: absolute;
-   
+
 ">by <a style="color: #333;" rel="no-follow" target="_Blank" href="https://www.fmeextensions.com/quick-contact-magento-2.html">Fmeextensions</a></p>  </div>
         </div>
         <?php } ?>
@@ -267,8 +267,8 @@ $country = $xml->geoplugin_countryName ;
                   <?php } ?>
 
                   <?php if ($this->getStoreName() !='') { ?>
-                  
-                  <li> 
+
+                  <li>
                     <h3><?php echo $this->getStoreName(); ?></h3>
                     <p><?php echo $this->getstreet1().' '.$this->getstreet2().' '.$this->getcity().','.$this->getzip();?>
                       <br>
@@ -277,7 +277,7 @@ $country = $xml->geoplugin_countryName ;
                     <li class="divider"></li>
                     <?php } ?>
 
-                    
+
                      <?php if ($this->getstoreemail()!='') { ?>
                       <li class="last">
                         <h3>Email Us</h3>
@@ -304,7 +304,7 @@ $country = $xml->geoplugin_countryName ;
                       data-mage-init='{"validation":{}}'>
 
 
-                      <fieldset class="fieldset"> 
+                      <fieldset class="fieldset">
                        <div>
                         <div class="field name required input_outer">
 
@@ -346,7 +346,7 @@ $country = $xml->geoplugin_countryName ;
 
                           <?php if($this->isCaptchaEnabled()) { ?>
                             <div class="g-recaptcha" name="recaptcha" id="recaptcha" data-sitekey="<?php echo $this->getsitekey(); ?>"></div>
-                            
+
                             <?php } ?>
 
 

@@ -1,11 +1,10 @@
 <?php
-/**
- * Copyright © 2016 AionNext Ltd. All rights reserved.
- * See COPYING.txt for license details.
- */
+
 namespace FME\Contactus\Model;
 
-class Contact extends \Magento\Framework\Model\AbstractModel
+use Magento\Framework\Model\AbstractModel;
+
+class Contact extends AbstractModel
 {
     /**
      * Statuses
@@ -33,7 +32,7 @@ class Contact extends \Magento\Framework\Model\AbstractModel
     /**
      * @return void
      */
-    protected function _construct()
+    protected function _construct(): void
     {
         $this->_init('FME\Contactus\Model\ResourceModel\Contact');
     }
@@ -43,7 +42,7 @@ class Contact extends \Magento\Framework\Model\AbstractModel
      *
      * @return array
      */
-    public function getIdentities()
+    public function getIdentities(): array
     {
         return [self::CACHE_TAG . '_' . $this->getId(), self::CACHE_TAG . '_' . $this->getId()];
     }
@@ -53,7 +52,7 @@ class Contact extends \Magento\Framework\Model\AbstractModel
      *
      * @return array
      */
-    public function getAvailableStatuses()
+    public function getAvailableStatuses(): array
     {
         return [self::STATUS_ENABLED => __('Enabled'), self::STATUS_DISABLED => __('Disabled')];
     }
