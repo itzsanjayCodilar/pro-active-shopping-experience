@@ -45,7 +45,7 @@ line-height:24px; margin:0;}
 .main_block .contact_container ul li p a:hover{ color:#1979c3;}
 
 /*form block*/
-    
+
 .main_block .form_block{ background-color:#f2f2f2; padding:30px; margin-top:50px;}
 
 .main_block .form_block .input_outer{ width:360px; margin:0 35px 30px 0; float:left;}
@@ -126,20 +126,33 @@ text-transform:none;}
 .main_block .form_block .captcha_container .Submit_input .input {margin: 0 5px 0 0; width: 60px; padding:6px 0;}
 .main_block .form_block .captcha_container .captcha { margin: 0 8px 0 0; width: 100px;}
 }
+#product-container {
+    /* No need to set any CSS for the container here */
+}
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+.product-item {
+    padding: 10px;
+    border-bottom: 1px solid lightgray;
+}
+
+.product-item img {
+    max-width: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
