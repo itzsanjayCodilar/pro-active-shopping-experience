@@ -2,7 +2,7 @@
 
 namespace Codilar\ProShopping\Controller\Recommend;
 
-use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
+use Codilar\ProShopping\Model\recommendation\ProductRecommendation;
 use Magento\Customer\Model\SessionFactory;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\RequestInterface;
@@ -10,14 +10,12 @@ use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\NotFoundException;
-use Codilar\ProShopping\Model\recommendation\ProductRecommendation;
 
 class PromotionProducts implements HttpPostActionInterface
 {
     public function __construct(
         private RequestInterface $request,
         private JsonFactory $jsonFactory,
-        private CollectionFactory $collectionFactory,
         private SessionFactory $customerSessionFactory,
         private ProductRecommendation $productRecommendation
     ) {
@@ -37,10 +35,20 @@ class PromotionProducts implements HttpPostActionInterface
         $logger->info("Calling my funcation");
         $customerSession = $this->customerSessionFactory->create();
         $customer = $customerSession->getCustomer();
-//        $this->productRecommendation->getProductsForLogInCustomer($customer);
-
+        if (!empty($customer->getId())) {
+            $productsSearchResult = $this->productRecommendation->getPromotinalProducts($customer);
+        } else {
+            $productsSearchResult = $this->productRecommendation->getPromotinalProducts();
+        }
         $productArr = [];
-
+        if (count($productsSearchResult->getItems()) > 0) {
+            foreach ($productsSearchResult->getItems() as $item) {
+                $productArr[] = [
+                    'id' =>$item->getId(),
+                    'sku' =>$item->getSku()
+                ];
+            }
+        }
         $jsonResult = json_encode($productArr);
         $result = $this->jsonFactory->create();
         $result->setData(['output' => $jsonResult]);

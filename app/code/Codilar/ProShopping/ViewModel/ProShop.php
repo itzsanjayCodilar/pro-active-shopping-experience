@@ -96,7 +96,7 @@ class ProShop implements ArgumentInterface
      */
     public function initialProductReferUrl()
     {
-        return "pro_shopping/Recommend/InitialProductRefer";
+        return "pro_shopping/Recommend/PromotionProducts";
     }
 
     /**
