@@ -3,7 +3,7 @@
 
     /** @var \Codilar\ProShopping\ViewModel\ProShop $viewModel */
     $viewModel = $block->getData('viewModel');
-    $categoryList = $viewModel->getAllSystemCategory();
+//    $categoryList = $viewModel->getAllSystemCategory();
     $products = $viewModel->getRecommendedProduct();
 
     if ($this->isPopupEnabled() && $this->isContactEnabled()) {
@@ -91,11 +91,11 @@
     </div>
 
     <div class="category-container">
-        <?php foreach ($categoryList->getItems() as $category) { ?>
-            <?php if ($category->getParentId()) { ?>
-                <p class="category-link" data-category-id="<?php echo $category->getId(); ?>"><?php echo $category->getName(); ?></p>
-            <?php } ?>
-        <?php } ?>
+<!--        --><?php //foreach ($categoryList->getItems() as $category) { ?>
+<!--            --><?php //if ($category->getParentId()) { ?>
+<!--                <p class="category-link" data-category-id="--><?php //echo $category->getId(); ?><!--">--><?php //echo $category->getName(); ?><!--</p>-->
+<!--            --><?php //} ?>
+<!--        --><?php //} ?>
     </div>
     <div id="budget-div" style="display: none;">
         <label for="budget">What is your budget?</label>
@@ -136,6 +136,25 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     jQuery(document).ready(function () {
+        let categories;
+        $('#yes').on('click', function () {
+            let categoryUrl = "<?= $viewModel->getCategoryUrl() ?>";
+            $.ajax({
+                url: categoryUrl,
+                type: 'POST',
+                dataType: 'json',
+                success: function (response) {
+                    categories = JSON.parse(response.output);
+                    console.log(categories);
+                },
+                error: function (err) {
+                    console.log(err.Message);
+                }
+            });
+        });
+
+
+
         let url = "<?= $viewModel->getProductCategoryUrl() ?>";
         let categoryId;
         jQuery('.category-link').on('click', function () {
@@ -196,7 +215,7 @@
             // Enable vertical scrolling for the product container
             productContainer.style.overflowY = 'scroll';
         }
-        
+
         function showSpecifications(products) {
             // Get the first product (you can modify this based on your requirement)
             const product = products[0];
