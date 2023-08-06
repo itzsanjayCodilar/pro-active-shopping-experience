@@ -80,7 +80,8 @@
         <h2><?php echo $viewModel->getWelcomeMessage() ?></h2>
         <h3><?php echo $viewModel->getConfirmMessage() ?></h3>
         <button id="yes">Yes</button>
-        <button id="no">No</button>
+        <button onclick='document.getElementById("message").innerHTML = "Thank You!"'>No</button>
+        <h2 id="message"></h2>
     <?php } ?>
 
     <div class="category-container"></div>
