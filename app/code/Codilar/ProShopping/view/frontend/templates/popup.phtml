@@ -106,7 +106,7 @@
         } else {
             echo "id=pop_button-right";
         } ?>>
-        <img src="<?php echo $this->getViewFileUrl('Codilar_ProShopping::images/tss-t.png'); ?>">
+        <img src="<?php echo $this->getViewFileUrl('Codilar_ProShopping::images/tss-t.png'); ?>" id="popUpButton">
 </div>
 
 <?php
@@ -273,5 +273,19 @@
             // Enable vertical scrolling for the product container
             productContainer.style.overflowY = 'scroll';
         }
+
+        jQuery('#popUpButton').on('click', function () {
+            let url = "<?= $viewModel->initialProductReferUrl() ?>";
+            $.ajax({
+                url: url,
+                type: 'POST',
+                dataType: 'json',
+                success: function (response) {
+                },
+                error: function (err) {
+                    console.log(err.Message);
+                }
+            });
+        });
     });
 </script>
