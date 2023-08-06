@@ -80,4 +80,14 @@ class ProShop implements ArgumentInterface
         }
         return $data;
     }
+
+    /**
+     * get initial product refer url
+     *
+     * @return string
+     */
+    public function initialProductReferUrl()
+    {
+        return "pro_shopping/Recommend/InitialProductRefer";
+    }
 }
