@@ -12,7 +12,7 @@ use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\NotFoundException;
 use Codilar\ProShopping\Model\recommendation\ProductRecommendation;
 
-class InitialProductRefer implements HttpPostActionInterface
+class PromotionProducts implements HttpPostActionInterface
 {
     public function __construct(
         private RequestInterface $request,

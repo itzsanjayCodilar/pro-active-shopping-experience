@@ -24,25 +24,15 @@
             <group id="pro_login_customer" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Pro Shopping Configuration For Login Customer</label>
                 <field id="suggest_product_sku_login" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Product suggestion</label>
+                    <label>Suggestion/Sponsor Product</label>
                     <comment><![CDATA[<strong style="color: red">Warning! </strong> Enter the skus by comma separated why]]></comment>
-                </field>
-                <field id="suggest_product_sku_percentage_login" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Product suggestion percentage</label>
-                    <source_model>Codilar\ProShopping\Model\Config\Source\ProductPercentageSuggestion</source_model>
-                    <comment>Percentage of the products will come to users recommendation</comment>
                 </field>
             </group>
             <group id="pro_guest_customer" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Pro Shopping Configuration For Guest Customer</label>
                 <field id="suggest_product_sku_guest" translate="label" type="textarea" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Product suggestion</label>
+                    <label>Suggestion/Sponsor Product</label>
                     <comment><![CDATA[<strong style="color: red">Warning! </strong> Enter the skus by comma separated why]]></comment>
-                </field>
-                <field id="suggest_product_sku_percentage_guest" translate="label" type="select" sortOrder="42" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Product suggestion percentage</label>
-                    <source_model>Codilar\ProShopping\Model\Config\Source\ProductPercentageSuggestion</source_model>
-                    <comment>Percentage of the products will come to users recommendation</comment>
                 </field>
             </group>
         </section>
