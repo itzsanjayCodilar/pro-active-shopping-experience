@@ -6,6 +6,7 @@ use Codilar\ProShopping\Model\Configuration;
 use Magento\Catalog\Model\ProductRepository;
 use Magento\Customer\Model\Customer;
 use Magento\Framework\Api\FilterBuilder;
+use Magento\Framework\Api\Search\FilterGroupBuilder;
 use  Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Wishlist\Model\Wishlist;
@@ -13,28 +14,44 @@ use Magento\Wishlist\Model\Wishlist;
 class ProductRecommendation
 {
     private const PRODUCT_LISTING_LIMIT = "pro_core/pro_core_config/product_limit";
+    private const IS_WISHLIST_PRODUCT_ENABLE = "pro_core/pro_login_customer/is_login_wishlist_allow";
 
     public function __construct(
         private Configuration $configuration,
         private Wishlist $wishlist,
         private SearchCriteriaBuilder $searchCriteriaBuilder,
         private FilterBuilder $filterBuilder,
+        private FilterGroupBuilder $filterGroupBuilder,
         private ProductRepository $productRepository
     ) {
     }
 
     /**
+     * Get promotional products
+     *
      * @param Customer $customer
-     * @return void
+     * @return \Magento\Catalog\Api\Data\ProductSearchResultsInterface
      */
-    public function getProductsForLogInCustomer(Customer $customer)
+    public function getPromotinalProducts(Customer $customer = null)
     {
-        $searchCriteria  = $this->searchCriteriaBuilder->create();
-        $actualLimit = $this->getLimitForProductList(true);
-        $searchCriteria->setPageSize($actualLimit);
-        $result = $this->productRepository->getList($searchCriteria);
-        $productLimit = $this->configuration->getConfigValue(self::PRODUCT_LISTING_LIMIT);
-        $wishListProducts = $this->getWishListProductByCustomerId($customer->getId());
+        $pageLimit = $this->configuration->getConfigValue(self::PRODUCT_LISTING_LIMIT);
+        if ($customer !== null) {
+            $skus = $this->configuration->getPromotialProductsConfig(false);
+        } else {
+            $wishListSku = [];
+            if ($this->configuration->getConfigValue(self::IS_WISHLIST_PRODUCT_ENABLE)) {
+                $wishListSku = $this->getWishListProductByCustomerId($customer);
+            }
+            $promoSkus = $this->configuration->getPromotialProductsConfig();
+            $skus = array_merge($promoSkus, $wishListSku);
+        }
+        $skusFilter = $this->filterBuilder
+             ->setField("sku")
+            ->setConditionType("in")
+            ->setValue($skus)->create();
+        $searchCriteria = $this->searchCriteriaBuilder->addFilters([$skusFilter])
+            ->setPageSize($pageLimit)->create();
+        return $this->productRepository->getList($searchCriteria);
     }
 
     private function getWishListProductByCustomerId($customerId)
@@ -42,11 +59,11 @@ class ProductRecommendation
         try {
             $wishListItems = $this->wishlist->loadByCustomerId($customerId)?->getItemCollection();
             if (!empty($wishListItems)) {
-                $products = [];
+                $productSkus = [];
                 foreach ($wishListItems as $item) {
-                    $products [] = $item->getProduct();
+                    $productSkus [] = $item->getProduct()->getSku();
                 }
-                return $products;
+                return $productSkus;
             }
             return [];
         } catch (NoSuchEntityException $e) {

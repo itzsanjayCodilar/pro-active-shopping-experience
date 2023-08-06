@@ -27,6 +27,10 @@
                     <label>Suggestion/Sponsor Product</label>
                     <comment><![CDATA[<strong style="color: red">Warning! </strong> Enter the skus by comma separated why]]></comment>
                 </field>
+                <field id="is_login_wishlist_allow" showInDefault="1" sortOrder="1" translate="label" type="select">
+                    <label>can customer see the wishlist product in promotion</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
             </group>
             <group id="pro_guest_customer" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Pro Shopping Configuration For Guest Customer</label>

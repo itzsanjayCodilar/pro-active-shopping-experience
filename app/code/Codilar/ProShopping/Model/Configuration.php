@@ -80,7 +80,7 @@ class Configuration
      * @param $store
      * @return array|string[]
      */
-    public function getInitialProductSkuForGuest($isGuest = true, $store = null)
+    public function getPromotialProductsConfig($isGuest = true, $store = null)
     {
         $skus = [];
         if (empty($store)) {
@@ -126,7 +126,7 @@ class Configuration
      * @param $store
      * @return mixed|null
      */
-    public function getConfigValue($configPath, $store = null, )
+    public function getConfigValue($configPath, $store = null)
     {
         if (empty($store)) {
             try {
