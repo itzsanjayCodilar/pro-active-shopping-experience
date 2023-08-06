@@ -5,6 +5,7 @@
             <resource id="Magento_Backend::admin">
                 <resource id="Codilar_ProShopping::proactive_shopping" title="Pro-Active Shopping" sortOrder="100">
                     <resource id="Codilar_ProShopping::product_recommendation" title="Pro-Active product recommend" sortOrder="10"/>
+                    <resource id="Codilar_ProShopping::welcome_message" title="Welcome Message" sortOrder="20"/>
                 </resource>
             </resource>
         </resources>
