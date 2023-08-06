@@ -163,4 +163,17 @@ class Configuration
             ScopeInterface::SCOPE_STORE
         );
     }
+
+    /**
+     * Get Welcome Message
+     *
+     * @return mixed
+     */
+    public function getConfirmationMessage(): mixed
+    {
+        return $this->scopeConfig->getValue(
+            'welcome_message/welcome_message_group/confirm_message',
+            ScopeInterface::SCOPE_STORE
+        );
+    }
 }

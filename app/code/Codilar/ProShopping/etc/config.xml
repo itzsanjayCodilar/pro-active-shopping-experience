@@ -15,6 +15,11 @@
             	<enabled_popup>1</enabled_popup>
             	<popup_view>0</popup_view>
             </popup_display>
+            <welcome_message_group>
+                <welcome_message_enabled>1</welcome_message_enabled>
+                <message>Welcome to Store</message>
+                <confirm_message>What would you like to buy?</confirm_message>
+            </welcome_message_group>
         </proshopping>
     </default>
 </config>

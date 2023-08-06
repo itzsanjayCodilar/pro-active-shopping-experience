@@ -110,6 +110,16 @@ class ProShop implements ArgumentInterface
     }
 
     /**
+     * Get Welcome Message
+     *
+     * @return string
+     */
+    public function getConfirmMessage(): string
+    {
+        return $this->configuration->getConfirmationMessage();
+    }
+
+    /**
      * Get Welcome Message Enabled
      *
      * @return bool
