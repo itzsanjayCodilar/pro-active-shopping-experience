@@ -114,7 +114,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function () {
+    jQuery(document).ready(function () {
         let url = "<?= $viewModel->getProductCategoryUrl() ?>";
         let categoryId;
         jQuery('.category-link').on('click', function () {
@@ -122,7 +122,7 @@
             categoryId = $(this).data('category-id');
 
             let products;
-            $.ajax({
+            jQuery.ajax({
                 url: url,
                 type: 'POST',
                 dataType: 'json',
@@ -146,9 +146,11 @@
                 let productDiv = document.createElement('div');
                 productDiv.className = 'product-item';
                 productDiv.innerHTML = `
-            <img src="${product.image}" alt="${product.sku}" />
-            <h3>${product.sku}</h3>
-            <p>Price: ${product.price}</p>
+            <img class="recomend-product-img" src="${product.image}" alt="${product.sku}" />
+            <div class="recomend-product-details">
+                    <p class="recomend-product-sku">Sku: ${product.name}</p>
+                    <p class="recomend-product-price">Price: ${Math.round(product.price)}</p>
+            </div>
         `;
                 productContainer.appendChild(productDiv);
             });
@@ -162,7 +164,7 @@
 
         jQuery('#popUpButton').on('click', function () {
             let url = "<?= $viewModel->initialProductReferUrl() ?>";
-            $.ajax({
+            jQuery.ajax({
                 url: url,
                 type: 'POST',
                 dataType: 'json',
