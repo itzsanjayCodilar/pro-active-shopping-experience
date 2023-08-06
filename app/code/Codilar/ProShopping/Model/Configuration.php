@@ -24,7 +24,7 @@ class Configuration
 
     public function getFrontName()
     {
-        if ($this->isContactEnabled()) {
+        if ($this->isShoppingEnabled()) {
             if ($this->pagelink()=='') {
                 return 'proshopping/front/index';
             } else {
@@ -34,7 +34,7 @@ class Configuration
             return 'contact';
         }
     }
-    public function isContactEnabled()
+    public function isShoppingEnabled()
     {
         return $this->scopeConfig->getValue(
             self::CP_CONTACT_ENABLE,

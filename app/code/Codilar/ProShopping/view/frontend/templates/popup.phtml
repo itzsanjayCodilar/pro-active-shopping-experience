@@ -6,8 +6,8 @@
     $categoryList = $viewModel->getAllSystemCategory();
     $products = $viewModel->getRecommendedProduct();
 
-    if($this->isPopupEnabled() && $this->isContactEnabled()){
-?>
+    if ($this->isPopupEnabled() && $this->isContactEnabled()) {
+        ?>
 
 
 <script type="text/javascript">
@@ -69,7 +69,11 @@
 
 </script>
 
-<div id="leftcontact" <?php if($this->popupposition() == 0) { echo "class=popup"; } else{ echo "class=popup-right"; }?>
+<div id="leftcontact" <?php if ($this->popupposition() == 0) {
+            echo "class=popup";
+        } else {
+            echo "class=popup-right";
+        } ?>
      data-value="hide">
 <div id="bcontactForm" name="bMyform" class="block contactFormheader">
     
@@ -92,19 +96,21 @@
 </div>
 </div>
 
-<div <?php if($this->popupposition() == 0) {
-    echo "class=share_box";
-} else { echo "class=share_box-right";
-}?>
-    <?php if($this->popupposition() == 0) {
-        echo "id=pop_button"; }
-    else {
-        echo "id=pop_button-right";
-    }?>>
+<div <?php if ($this->popupposition() == 0) {
+            echo "class=share_box";
+        } else {
+            echo "class=share_box-right";
+        } ?>
+    <?php if ($this->popupposition() == 0) {
+            echo "id=pop_button";
+        } else {
+            echo "id=pop_button-right";
+        } ?>>
         <img src="<?php echo $this->getViewFileUrl('Codilar_ProShopping::images/tss-t.png'); ?>">
 </div>
 
-<?php } ?>
+<?php
+    } ?>
 
 <style type="text/css">
 

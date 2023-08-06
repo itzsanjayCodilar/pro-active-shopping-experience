@@ -76,7 +76,7 @@ class ShoppingBlock extends Template
      */
     public function isContactEnabled()
     {
-        return $this->_mymoduleHelper->isContactEnabled();
+        return $this->_mymoduleHelper->isShoppingEnabled();
     }
 
     /**
