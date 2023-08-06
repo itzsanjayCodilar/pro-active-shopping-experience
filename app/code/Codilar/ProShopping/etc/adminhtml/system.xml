@@ -8,7 +8,7 @@
             <label>Pro-Active Shopping</label>
             <tab>pro_shopping</tab>
             <resource>Codilar_ProShopping::product_recommendation</resource>
-            <group id="pro_core_config" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="pro_core_config" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Pro Shopping Configuration</label>
                 <field id="is_pro_enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Is Enable</label>
@@ -21,7 +21,7 @@
                     </depends>
                 </field>
             </group>
-            <group id="pro_login_customer" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="pro_login_customer" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Pro Shopping Configuration For Login Customer</label>
                 <field id="suggest_product_sku_login" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Product suggestion</label>
@@ -33,7 +33,7 @@
                     <comment>Percentage of the products will come to users recommendation</comment>
                 </field>
             </group>
-            <group id="pro_guest_customer" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="pro_guest_customer" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Pro Shopping Configuration For Guest Customer</label>
                 <field id="suggest_product_sku_guest" translate="label" type="textarea" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Product suggestion</label>
@@ -47,11 +47,11 @@
             </group>
         </section>
 
-        <section id="proshopping" translate="label" type="text" sortOrder="1000" showInDefault="1" showInWebsite="1" showInStore="1">
+        <section id="proshopping" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
             <label>ProShopping</label>
             <tab>pro_shopping</tab>
             <resource>Codilar_ProShopping::proshopping</resource>
-            <group id="active_display" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="active_display" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Contact Page Settings</label>
                 <field id="enabled_proshopping" translate="label" type="select" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enable ProShopping</label>
@@ -60,7 +60,7 @@
                 </field>
             </group>
 
-            <group id="popup_display" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="popup_display" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Quick Contact Popup Settings</label>
                 <field id="enabled_popup" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enable Popup</label>
@@ -71,6 +71,31 @@
                 <field id="popup_view" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Popup Position</label>
                     <source_model>Codilar\ProShopping\Model\Config\Source\ListMode</source_model>
+                </field>
+            </group>
+        </section>
+
+        <section id="welcome-message" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Welcome Message</label>
+            <tab>pro_shopping</tab>
+            <resource>Codilar_ProShopping::welcome_message</resource>
+            <group id="welcome-message-group" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Welcome Message Configuration</label>
+                <field id="welcome-message-enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Is Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="message" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Welcome Message</label>
+                    <depends>
+                        <field id="welcome-message-enabled">1</field>
+                    </depends>
+                </field>
+                <field id="confirm-message" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Welcome Confirm Message</label>
+                    <depends>
+                        <field id="welcome-message-enabled">1</field>
+                    </depends>
                 </field>
             </group>
         </section>
