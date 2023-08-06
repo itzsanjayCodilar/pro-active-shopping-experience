@@ -8,32 +8,40 @@ use Magento\Catalog\Api\Data\CategorySearchResultsInterface;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
+use Codilar\ProShopping\Model\Configuration;
 
 class ProShop implements ArgumentInterface
 {
     /**
      * @var SearchCriteriaBuilder
      */
-    private $searchCriteriaBuilder;
+    private SearchCriteriaBuilder $searchCriteriaBuilder;
 
     /**
      * @var CategoryListInterface
      */
-    private $categoryList;
+    private CategoryListInterface $categoryList;
 
     /**
      * @var CollectionFactory
      */
-    private $productRepository;
+    private CollectionFactory $productRepository;
+
+    /**
+     * @var Configuration
+     */
+    private Configuration $configuration;
 
     public function __construct(
         CategoryListInterface $categoryList,
         SearchCriteriaBuilder $searchCriteriaBuilder,
-        CollectionFactory $productRepository
+        CollectionFactory $productRepository,
+        Configuration $configuration
     ) {
         $this->categoryList = $categoryList;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         $this->productRepository = $productRepository;
+        $this->configuration = $configuration;
     }
 
     /**
@@ -89,5 +97,25 @@ class ProShop implements ArgumentInterface
     public function initialProductReferUrl()
     {
         return "pro_shopping/Recommend/InitialProductRefer";
+    }
+
+    /**
+     * Get Welcome Message
+     *
+     * @return string
+     */
+    public function getWelcomeMessage(): string
+    {
+        return $this->configuration->getWelcomeMessage();
+    }
+
+    /**
+     * Get Welcome Message Enabled
+     *
+     * @return bool
+     */
+    public function getWelcomeMessageEnabled(): bool
+    {
+        return $this->configuration->getWelcomeMessageEnabled();
     }
 }
