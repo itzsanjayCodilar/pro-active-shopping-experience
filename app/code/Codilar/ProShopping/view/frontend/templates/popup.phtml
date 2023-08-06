@@ -76,7 +76,7 @@
         } ?>
      data-value="hide">
 <div id="bcontactForm" name="bMyform" class="block contactFormheader">
-    
+
     <div class="category-container">
         <?php foreach ($products as $single) { ?>
                 <p class="category-link"><?php echo $single['name'] ?></p>
@@ -253,23 +253,25 @@
         });
 
         function displayProducts(products) {
-            // Get the new div where you want to display the products
-            let productContainer = $('#product-container');
-            // Clear any existing content in the container
-            productContainer.empty();
+            let productContainer = document.getElementById('product-container');
+            productContainer.innerHTML = '';
 
-            // Loop through each product and generate HTML
             products.forEach(function (product) {
-                let productHTML = `
-                    <div class="product-item">
-                        <img src="${product.image}" alt="${product.sku}" />
-                        <h3>${product.sku}</h3>
-                        <p>Price: ${product.price}</p>
-                    </div>
-                `;
-                // Append the product HTML to the container
-                productContainer.append(productHTML);
+                let productDiv = document.createElement('div');
+                productDiv.className = 'product-item';
+                productDiv.innerHTML = `
+            <img src="${product.image}" alt="${product.sku}" />
+            <h3>${product.sku}</h3>
+            <p>Price: ${product.price}</p>
+        `;
+                productContainer.appendChild(productDiv);
             });
+
+            // Set a fixed height for the product container
+            productContainer.style.height = '300px'; // Adjust the height as needed
+
+            // Enable vertical scrolling for the product container
+            productContainer.style.overflowY = 'scroll';
         }
     });
 </script>
