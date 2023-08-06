@@ -77,6 +77,10 @@
      data-value="hide">
 <div id="bcontactForm" name="bMyform" class="block contactFormheader">
 
+    <?php if ($viewModel->getWelcomeMessageEnabled()) { ?>
+        <h2><?php $viewModel->getWelcomeMessage() ?></h2>
+    <?php } ?>
+
     <div class="category-container">
         <?php foreach ($products as $single) { ?>
                 <p class="category-link"><?php echo $single['name'] ?></p>

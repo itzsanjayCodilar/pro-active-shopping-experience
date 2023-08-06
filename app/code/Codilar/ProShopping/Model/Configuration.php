@@ -132,9 +132,35 @@ class Configuration
             try {
                 $store = $this->storeManager->getStore()?->getId();
             } catch (NoSuchEntityException $e) {
-                return null;
+                $store = null;
             }
         }
         return $this->scopeConfig->getValue($configPath, ScopeInterface::SCOPE_STORE, $store);
+    }
+
+    /**
+     * Get Welcome Message
+     *
+     * @return mixed
+     */
+    public function getWelcomeMessage(): mixed
+    {
+        return $this->scopeConfig->getValue(
+            'welcome_message/welcome_message_group/message',
+            ScopeInterface::SCOPE_STORE
+        );
+    }
+
+    /**
+     * Get Welcome Message Enabled
+     *
+     * @return mixed
+     */
+    public function getWelcomeMessageEnabled(): mixed
+    {
+        return $this->scopeConfig->getValue(
+            'welcome_message/welcome_message_group/welcome_message_enabled',
+            ScopeInterface::SCOPE_STORE
+        );
     }
 }
