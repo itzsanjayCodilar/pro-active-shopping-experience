@@ -5,14 +5,44 @@
             <label>Pro-Active Shopping</label>
         </tab>
         <section id="pro_core" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-            <label>Pro Shopping Core</label>
+            <label>Pro-Active Shopping</label>
             <tab>pro_shopping</tab>
             <resource>Codilar_ProShopping::product_recommendation</resource>
-            <group id="pro_" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Core configuration</label>
-                <field id="is_pro_enable" translate="label" type="select" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="pro_core_config" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Pro Shopping Configuration</label>
+                <field id="is_pro_enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Is Enable</label>
                     <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="product_limit" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product limit to show</label>
+                    <depends>
+                        <field id="is_pro_enable">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="pro_login_customer" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Pro Shopping Configuration For Login Customer</label>
+                <field id="suggest_product_sku_login" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product suggestion</label>
+                    <comment><![CDATA[<strong style="color: red">Warning! </strong> Enter the skus by comma separated why]]></comment>
+                </field>
+                <field id="suggest_product_sku_percentage_login" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product suggestion percentage</label>
+                    <source_model>Codilar\ProShopping\Model\Config\Source\ProductPercentageSuggestion</source_model>
+                    <comment>Percentage of the products will come to users recommendation</comment>
+                </field>
+            </group>
+            <group id="pro_guest_customer" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Pro Shopping Configuration For Guest Customer</label>
+                <field id="suggest_product_sku_guest" translate="label" type="textarea" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product suggestion</label>
+                    <comment><![CDATA[<strong style="color: red">Warning! </strong> Enter the skus by comma separated why]]></comment>
+                </field>
+                <field id="suggest_product_sku_percentage_guest" translate="label" type="select" sortOrder="42" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product suggestion percentage</label>
+                    <source_model>Codilar\ProShopping\Model\Config\Source\ProductPercentageSuggestion</source_model>
+                    <comment>Percentage of the products will come to users recommendation</comment>
                 </field>
             </group>
         </section>
