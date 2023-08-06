@@ -147,6 +147,8 @@
                         // Hide the specification section if it was shown previously
                         // Show the budget buttons
                         $('#budget-div').show();
+                        $('#product-container').hide();
+
                     });
                     $('.budget-button').on('click', function () {
                         // Get the budget value from the data attribute of the clicked button
@@ -154,6 +156,7 @@
 
                         // Hide the budget buttons after selecting the budget
                         $('#budget-div').hide();
+                        $('#product-container').show();
 
 
                         // Continue with the AJAX request and display products
