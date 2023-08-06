@@ -3,7 +3,6 @@
 
     /** @var \Codilar\ProShopping\ViewModel\ProShop $viewModel */
     $viewModel = $block->getData('viewModel');
-//    $categoryList = $viewModel->getAllSystemCategory();
     $products = $viewModel->getRecommendedProduct();
 
     if ($this->isPopupEnabled() && $this->isContactEnabled()) {
@@ -84,19 +83,7 @@
         <button id="no">No</button>
     <?php } ?>
 
-    <div class="category-container">
-        <?php foreach ($products as $single) { ?>
-                <p class="category-link"><?php echo $single['name'] ?></p>
-        <?php } ?>
-    </div>
-
-    <div class="category-container">
-<!--        --><?php //foreach ($categoryList->getItems() as $category) { ?>
-<!--            --><?php //if ($category->getParentId()) { ?>
-<!--                <p class="category-link" data-category-id="--><?php //echo $category->getId(); ?><!--">--><?php //echo $category->getName(); ?><!--</p>-->
-<!--            --><?php //} ?>
-<!--        --><?php //} ?>
-    </div>
+    <div class="category-container"></div>
     <div id="budget-div" style="display: none;">
         <label for="budget">What is your budget?</label>
         <div>
@@ -145,46 +132,44 @@
                 dataType: 'json',
                 success: function (response) {
                     categories = JSON.parse(response.output);
-                    console.log(categories);
-                },
-                error: function (err) {
-                    console.log(err.Message);
-                }
-            });
-        });
+                    categories.forEach(function (category) {
+                        let element = `<p class='category-link' data-category-id='${category.id}'>${category.name}</p>`;
+                        $('.category-container').append(element);
+                    });
 
+                    jQuery('.category-link').on('click', function () {
+                        // Get the data-category-id attribute value of the clicked element
+                        categoryId = $(this).data('category-id');
+                        // Hide the specification section if it was shown previously
+                        // Show the budget buttons
+                        $('#budget-div').show();
+                    });
+                    $('.budget-button').on('click', function () {
+                        // Get the budget value from the data attribute of the clicked button
+                        const budget = $(this).data('budget');
 
+                        // Hide the budget buttons after selecting the budget
+                        $('#budget-div').hide();
 
-        let url = "<?= $viewModel->getProductCategoryUrl() ?>";
-        let categoryId;
-        jQuery('.category-link').on('click', function () {
-            // Get the data-category-id attribute value of the clicked element
-            categoryId = $(this).data('category-id');
-            // Hide the specification section if it was shown previously
-            $('#specification-section').hide();
-            // Show the budget buttons
-            $('#budget-div').show();
-        });
-        $('.budget-button').on('click', function () {
-            // Get the budget value from the data attribute of the clicked button
-            const budget = $(this).data('budget');
-
-            // Hide the budget buttons after selecting the budget
-            $('#budget-div').hide();
-
-            // Continue with the AJAX request and display products
-            let products;
-            $.ajax({
-                url: url,
-                type: 'POST',
-                dataType: 'json',
-                data: { categoryId: categoryId, budget: budget },
-                success: function (response) {
-                    products = JSON.parse(response.output);
-                    // Call function to display products in the new div
-                    displayProducts(products);
-                    // Show the specification section
-                    showSpecifications(products);
+                        // Continue with the AJAX request and display products
+                        let products;
+                        let url = "<?= $viewModel->getProductCategoryUrl() ?>";
+                        $.ajax({
+                            url: url,
+                            type: 'POST',
+                            dataType: 'json',
+                            data: { categoryId: categoryId, budget: budget },
+                            success: function (response) {
+                                products = JSON.parse(response.output);
+                                // Call function to display products in the new div
+                                displayProducts(products);
+                                // Show the specification section
+                            },
+                            error: function (err) {
+                                console.log(err.Message);
+                            }
+                        });
+                    });
                 },
                 error: function (err) {
                     console.log(err.Message);
@@ -215,18 +200,6 @@
             // Enable vertical scrolling for the product container
             productContainer.style.overflowY = 'scroll';
         }
-
-        function showSpecifications(products) {
-            // Get the first product (you can modify this based on your requirement)
-            const product = products[0];
-
-            // Display RAM, Storage, and Battery details in the specification section
-            $('#ram').text(`RAM: ${product.ram}`);
-            $('#storage').text(`Storage: ${product.storage}`);
-            $('#battery').text(`Battery: ${product.battery}`);
-
-            // Show the specification section
-            $('#specification-section').show();
-        }
     });
 </script>
+
