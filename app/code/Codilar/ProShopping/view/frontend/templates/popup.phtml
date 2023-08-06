@@ -90,8 +90,22 @@
             <?php } ?>
         <?php } ?>
     </div>
+    <div id="budget-div" style="display: none;">
+        <label for="budget">What is your budget?</label>
+        <div>
+            <button class="budget-button" data-budget="15000">15k</button>
+            <button class="budget-button" data-budget="5000">5k</button>
+            <button class="budget-button" data-budget="10000">10k</button>
+        </div>
+    </div>
     <!-- New div to display products -->
     <div id="product-container"></div>
+    <div id="specification-section" style="display: none;">
+        <h2>Specifications</h2>
+        <div id="ram"></div>
+        <div id="storage"></div>
+        <div id="battery"></div>
+    </div>
 
 </div>
 </div>
@@ -120,17 +134,31 @@
         jQuery('.category-link').on('click', function () {
             // Get the data-category-id attribute value of the clicked element
             categoryId = $(this).data('category-id');
+            // Hide the specification section if it was shown previously
+            $('#specification-section').hide();
+            // Show the budget buttons
+            $('#budget-div').show();
+        });
+        $('.budget-button').on('click', function () {
+            // Get the budget value from the data attribute of the clicked button
+            const budget = $(this).data('budget');
 
+            // Hide the budget buttons after selecting the budget
+            $('#budget-div').hide();
+
+            // Continue with the AJAX request and display products
             let products;
-            jQuery.ajax({
+            $.ajax({
                 url: url,
                 type: 'POST',
                 dataType: 'json',
-                data: { categoryId: categoryId },
+                data: { categoryId: categoryId, budget: budget },
                 success: function (response) {
                     products = JSON.parse(response.output);
                     // Call function to display products in the new div
                     displayProducts(products);
+                    // Show the specification section
+                    showSpecifications(products);
                 },
                 error: function (err) {
                     console.log(err.Message);
@@ -175,5 +203,17 @@
                 }
             });
         });
+        function showSpecifications(products) {
+            // Get the first product (you can modify this based on your requirement)
+            const product = products[0];
+
+            // Display RAM, Storage, and Battery details in the specification section
+            $('#ram').text(`RAM: ${product.ram}`);
+            $('#storage').text(`Storage: ${product.storage}`);
+            $('#battery').text(`Battery: ${product.battery}`);
+
+            // Show the specification section
+            $('#specification-section').show();
+        }
     });
 </script>
