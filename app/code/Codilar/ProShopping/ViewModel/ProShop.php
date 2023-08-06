@@ -128,4 +128,9 @@ class ProShop implements ArgumentInterface
     {
         return $this->configuration->getWelcomeMessageEnabled();
     }
+
+    public function getCategoryUrl()
+    {
+        return "pro_shopping/Recommend/GetCategories";
+    }
 }
