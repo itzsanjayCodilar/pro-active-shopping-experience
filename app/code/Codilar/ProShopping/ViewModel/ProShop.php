@@ -56,7 +56,7 @@ class ProShop implements ArgumentInterface
 
     public function getProductCategoryUrl()
     {
-        return "pro_shopping/Recommend/InitialProductRefer";
+        return "pro_shopping/Recommend/ProductListByCategory";
     }
 
     public function getRecommendedProduct()
