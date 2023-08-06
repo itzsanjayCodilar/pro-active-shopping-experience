@@ -196,20 +196,7 @@
             // Enable vertical scrolling for the product container
             productContainer.style.overflowY = 'scroll';
         }
-
-        jQuery('#popUpButton').on('click', function () {
-            let url = "<?= $viewModel->initialProductReferUrl() ?>";
-            jQuery.ajax({
-                url: url,
-                type: 'POST',
-                dataType: 'json',
-                success: function (response) {
-                },
-                error: function (err) {
-                    console.log(err.Message);
-                }
-            });
-        });
+        
         function showSpecifications(products) {
             // Get the first product (you can modify this based on your requirement)
             const product = products[0];
