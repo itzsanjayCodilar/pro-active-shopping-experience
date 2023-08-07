@@ -62,36 +62,4 @@ class ShoppingBlock extends Template
         }
         return $this;
     }
-
-    /**
-     * @return mixed
-     */
-    public function isimage()
-    {
-        return $this->_mymoduleHelper->isNewsImageEnabled();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function isContactEnabled()
-    {
-        return $this->_mymoduleHelper->isShoppingEnabled();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function isPopupEnabled()
-    {
-        return $this->_mymoduleHelper->isPopupEnabled();
-    }
-
-    /**
-     * @return mixed
-     */
-    public function popupposition()
-    {
-        return $this->_mymoduleHelper->popupposition();
-    }
 }

@@ -5,7 +5,7 @@
 	</head>
     <body>
         <referenceBlock name="after.body.start">
-            <block class="Codilar\ProShopping\Block\ShoppingBlock" name="popup" after="-"
+            <block class="Magento\Framework\View\Element\Template" name="popup" after="-"
                    template="Codilar_ProShopping::popup.phtml" ifconfig="pro_core/pro_core_config/is_pro_enable">
                 <arguments>
                     <argument name="viewModel" xsi:type="object">Codilar\ProShopping\ViewModel\ProShop</argument>
