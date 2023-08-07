@@ -1,99 +1,96 @@
 <?php
-    /** @var $block \Codilar\ProShopping\Block\ShoppingBlock */
+/** @var ProShop $viewModel */
 
-    /** @var \Codilar\ProShopping\ViewModel\ProShop $viewModel */
-    $viewModel = $block->getData('viewModel');
+use Codilar\ProShopping\ViewModel\ProShop;
 
-    if ($viewModel->isProActionUiEnabled()) {
-        ?>
+$viewModel = $this->getData('viewModel');
 
-<script type="text/javascript">
-    require(['jquery', // jquery Library
+if ($viewModel->isProActionUiEnabled()) {
+    ?>
 
-       // Magento text translate (Validation message translte as per language)
+    <script type="text/javascript">
+        require(['jquery', // jquery Library
 
-        // Jquery Validation Library
-        'jquery/ui' // Jquery UI Library
-    ], function ($) {
-        $('#pop_button').click(function() {
-         if($(this).css("margin-left") == "300px" || $(this).css("margin-left") == "280px")
-        {
-            $('.popup').animate({"margin-left": '-=300'});
-            $('#pop_button').animate({"margin-left": '-=280'});
-        }
-        else
-        {
-            $('.popup').animate({"margin-left": '+=300'});
-            $('#pop_button').animate({"margin-left": '+=280'});
-        }
-    });
+            // Magento text translate (Validation message translte as per language)
 
-        $('#pop_button-right').click(function() {
+            // Jquery Validation Library
+            'jquery/ui' // Jquery UI Library
+        ], function ($) {
+            $('#pop_button').click(function () {
+                if ($(this).css("margin-left") == "300px" || $(this).css("margin-left") == "280px") {
+                    $('.popup').animate({"margin-left": '-=300'});
+                    $('#pop_button').animate({"margin-left": '-=280'});
+                } else {
+                    $('.popup').animate({"margin-left": '+=300'});
+                    $('#pop_button').animate({"margin-left": '+=280'});
+                }
+            });
 
+            $('#pop_button-right').click(function () {
 
-        if($(this).css("margin-right") == "300px" || $(this).css("margin-right") == "280px")
-        {
-            $('.popup-right').animate({"margin-right": '-=300'});
-            $('#pop_button-right').animate({"margin-right": '-=280'});
-        }
-        else
-        {
-            $('.popup-right').animate({"margin-right": '+=300'});
-            $('#pop_button-right').animate({"margin-right": '+=280'});
-        }
-    });
+                if ($(this).css("margin-right") == "300px" || $(this).css("margin-right") == "280px") {
+                    $('.popup-right').animate({"margin-right": '-=300'});
+                    $('#pop_button-right').animate({"margin-right": '-=280'});
+                } else {
+                    $('.popup-right').animate({"margin-right": '+=300'});
+                    $('#pop_button-right').animate({"margin-right": '+=280'});
+                }
+            });
 
-    });
+        });
 
-</script>
+    </script>
 
-<div id="leftcontact" <?php if ($viewModel->getPopUpPosition() == 0) {
-            echo "class=popup";
-        } else {
-            echo "class=popup-right";
-        } ?>
-     data-value="hide">
-    <div id="bcontactForm" name="bMyform" class="block contactFormheader">
-
-        <?php if ($viewModel->isWelcomeMessage()) { ?>
-            <p class="welcome-message"><?= $viewModel->getWelcomeMessage() ?></p>
-            <h3><?= $viewModel->getActionWelcomeMessage() ?></h3>
-            <button class="yes confirm-button" id="yes">Purchase</button>
-            <button class="order-history confirm-button" onclick='document.getElementById("message").innerHTML = "Order History feature will be developed after winning this Hackathon!"'>Check Order History</button>
-            <h2 id="message"></h2>
-        <?php } ?>
-
-        <div class="category-container"></div>
-        <div id="budget-div" style="display: none;">
-            <label for="budget">What is your budget?</label>
-            <div>
-                <button class="budget-button" data-budget="5000">0-5k</button>
-                <button class="budget-button" data-budget="10000">5k-10k</button>
-                <button class="budget-button" data-budget="20000">10k-20k</button>
-                <button class="budget-button" data-budget="80000">20k-More</button>
-            </div>
-        </div>
-        <!-- New div to display products -->
-        <div id="product-container"></div>
-
-    </div>
-</div>
-
-<div <?php if ($viewModel->getPopUpPosition() == 0) {
-            echo "class=share_box";
-        } else {
-            echo "class=share_box-right";
-        } ?>
-    <?php if ($viewModel->getPopUpPosition()== 0) {
-            echo "id=pop_button";
-        } else {
-            echo "id=pop_button-right";
-        } ?>>
-        <img src="<?php echo $this->getViewFileUrl('Codilar_ProShopping::images/tss-t.png'); ?>" id="popUpButton">
-</div>
-
-<?php
+    <div id="leftcontact" <?php if ($viewModel->getPopUpPosition() == 0) {
+        echo "class=popup";
+    } else {
+        echo "class=popup-right";
     } ?>
+         data-value="hide">
+        <div id="bcontactForm" name="bMyform" class="block contactFormheader">
+
+            <?php if ($viewModel->isWelcomeMessage()) { ?>
+                <p class="welcome-message"><?= $viewModel->getWelcomeMessage() ?></p>
+                <h3><?= $viewModel->getActionWelcomeMessage() ?></h3>
+                <button class="yes confirm-button" id="yes">Purchase</button>
+                <button class="order-history confirm-button"
+                        onclick='document.getElementById("message").innerHTML = "Order History feature will be developed after winning this Hackathon!"'>
+                    Check Order History
+                </button>
+                <h2 id="message"></h2>
+            <?php } ?>
+
+            <div class="category-container"></div>
+            <div id="budget-div" style="display: none;">
+                <label for="budget">What is your budget?</label>
+                <div>
+                    <button class="budget-button" data-budget="5000">0-5k</button>
+                    <button class="budget-button" data-budget="10000">5k-10k</button>
+                    <button class="budget-button" data-budget="20000">10k-20k</button>
+                    <button class="budget-button" data-budget="80000">20k-More</button>
+                </div>
+            </div>
+            <!-- New div to display products -->
+            <div id="product-container"></div>
+
+        </div>
+    </div>
+
+    <div <?php if ($viewModel->getPopUpPosition() == 0) {
+        echo "class=share_box";
+    } else {
+        echo "class=share_box-right";
+    } ?>
+        <?php if ($viewModel->getPopUpPosition() == 0) {
+        echo "id=pop_button";
+    } else {
+        echo "id=pop_button-right";
+    } ?>>
+        <img src="<?php echo $this->getViewFileUrl('Codilar_ProShopping::images/tss-t.png'); ?>" id="popUpButton">
+    </div>
+
+    <?php
+} ?>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
@@ -139,7 +136,7 @@
                             url: categoryProductUrl,
                             type: 'POST',
                             dataType: 'json',
-                            data: { categoryId: categoryId, budget: budget },
+                            data: {categoryId: categoryId, budget: budget},
                             success: function (response) {
                                 products = JSON.parse(response.output);
                                 // Call function to display products in the new div

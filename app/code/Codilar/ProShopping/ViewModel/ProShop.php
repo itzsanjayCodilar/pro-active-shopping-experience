@@ -25,7 +25,7 @@ class ProShop implements ArgumentInterface
     private const WELCOME_MESSAGE = "pro_popup/welcome_message_group/message";
 
     /**
-     * Welcome action message
+     * Welcome to action message
      */
     private const WELCOME_ACTION_MESSAGE = "pro_popup/welcome_message_group/confirm_message";
 
