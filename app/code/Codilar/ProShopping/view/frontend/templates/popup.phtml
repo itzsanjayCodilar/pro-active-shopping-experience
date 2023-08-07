@@ -77,10 +77,10 @@
 <div id="bcontactForm" name="bMyform" class="block contactFormheader">
 
     <?php if ($viewModel->getWelcomeMessageEnabled()) { ?>
-        <h2><?php echo $viewModel->getWelcomeMessage() ?></h2>
+        <p class="welcome-message"><?php echo $viewModel->getWelcomeMessage() ?></p>
         <h3><?php echo $viewModel->getConfirmMessage() ?></h3>
-        <button id="yes">Purchase</button>
-        <button onclick='document.getElementById("message").innerHTML = "Order History feature will be developed after winning this Hackathon!"'>Check Order History</button>
+        <button class="yes confirm-button" id="yes">Purchase</button>
+        <button class="order-history confirm-button" onclick='document.getElementById("message").innerHTML = "Order History feature will be developed after winning this Hackathon!"'>Check Order History</button>
         <h2 id="message"></h2>
     <?php } ?>
 
