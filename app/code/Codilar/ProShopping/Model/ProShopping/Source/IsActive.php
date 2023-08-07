@@ -1,8 +1,5 @@
 <?php
-/**
- * Copyright © 2016 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
+
 namespace Codilar\ProShopping\Model\ProShopping\Source;
 
 use Magento\Cms\Model\Block;

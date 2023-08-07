@@ -11,6 +11,9 @@ use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\NotFoundException;
 
+/**
+ * Future code
+ */
 class PromotionProducts implements HttpPostActionInterface
 {
     /**
@@ -29,16 +32,13 @@ class PromotionProducts implements HttpPostActionInterface
 
     /**
      * Execute action based on request and return result
+     * Future code
      *
      * @return ResultInterface|ResponseInterface
      * @throws NotFoundException
      */
     public function execute()
     {
-        $writer = new \Zend_Log_Writer_Stream(BP . '/var/log/custom.log');
-        $logger = new \Zend_Log();
-        $logger->addWriter($writer);
-        $logger->info("Calling my funcation");
         $customerSession = $this->customerSessionFactory->create();
         $customer = $customerSession->getCustomer();
         if (!empty($customer->getId())) {
