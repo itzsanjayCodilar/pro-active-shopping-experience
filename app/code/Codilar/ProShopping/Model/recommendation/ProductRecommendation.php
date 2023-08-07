@@ -36,6 +36,7 @@ class ProductRecommendation
 
     /**
      * Get promotional products
+     * Future code
      *
      * @param Customer $customer
      * @return \Magento\Catalog\Api\Data\ProductSearchResultsInterface
@@ -64,6 +65,7 @@ class ProductRecommendation
 
     /**
      * Get wishlist product by customer id
+     * Future code
      *
      * @param $customerId
      * @return array
