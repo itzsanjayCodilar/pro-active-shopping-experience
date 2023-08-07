@@ -43,10 +43,20 @@ class ProductListByCategory implements HttpPostActionInterface
 
         $id = $this->request->getParam('categoryId');
         $budgetValue = $this->request->getParam('budget');
+        $topPrice = 0;
+        $fromPrice = 0;
+        if (!empty($budgetValue)) {
+            $prices =  explode("-", $budgetValue);
+            $fromPrice = $prices[0];
+            $topPrice = $prices[1];
+        }
         $productCollection = $this->collectionFactory->create();
         $productCollection->addAttributeToSelect('*');
         $productCollection->addCategoriesFilter(['eq' => $id]);
-        $productCollection->addAttributeToFilter('price', ['lt' => $budgetValue]);
+        $productCollection->addAttributeToFilter('price', ['gteq' => $fromPrice]);
+        if ($topPrice !== 'more') {
+            $productCollection->addAttributeToFilter('price', ['lteq' => $topPrice]);
+        }
         $products = $productCollection->getItems();
         $productArr = [];
         foreach ($products as $product) {
