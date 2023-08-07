@@ -6,10 +6,17 @@ use Magento\Catalog\Api\CategoryListInterface;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\App\Action\HttpPostActionInterface;
+use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\Result\JsonFactory;
 
 class GetCategories implements HttpPostActionInterface
 {
+    /**
+     * @param CategoryListInterface $categoryList
+     * @param SearchCriteriaBuilder $searchCriteriaBuilder
+     * @param JsonFactory $jsonFactory
+     * @param FilterBuilder $filterBuilder
+     */
     public function __construct(
         private CategoryListInterface $categoryList,
         private SearchCriteriaBuilder $searchCriteriaBuilder,
@@ -19,6 +26,11 @@ class GetCategories implements HttpPostActionInterface
     ) {
     }
 
+    /**
+     * get Categories method
+     *
+     * @return ResponseInterface|\Magento\Framework\Controller\Result\Json|\Magento\Framework\Controller\ResultInterface
+     */
     public function execute()
     {
         $categories = [];

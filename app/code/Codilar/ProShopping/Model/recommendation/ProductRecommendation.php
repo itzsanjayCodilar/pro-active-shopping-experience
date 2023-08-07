@@ -16,6 +16,14 @@ class ProductRecommendation
     private const PRODUCT_LISTING_LIMIT = "pro_core/pro_core_config/product_limit";
     private const IS_WISHLIST_PRODUCT_ENABLE = "pro_core/pro_login_customer/is_login_wishlist_allow";
 
+    /**
+     * @param Configuration $configuration
+     * @param Wishlist $wishlist
+     * @param SearchCriteriaBuilder $searchCriteriaBuilder
+     * @param FilterBuilder $filterBuilder
+     * @param FilterGroupBuilder $filterGroupBuilder
+     * @param ProductRepository $productRepository
+     */
     public function __construct(
         private Configuration $configuration,
         private Wishlist $wishlist,
@@ -54,6 +62,12 @@ class ProductRecommendation
         return $this->productRepository->getList($searchCriteria);
     }
 
+    /**
+     * Get wishlist product by customer id
+     *
+     * @param $customerId
+     * @return array
+     */
     private function getWishListProductByCustomerId($customerId)
     {
         try {

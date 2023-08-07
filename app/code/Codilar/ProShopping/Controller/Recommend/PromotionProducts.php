@@ -13,6 +13,12 @@ use Magento\Framework\Exception\NotFoundException;
 
 class PromotionProducts implements HttpPostActionInterface
 {
+    /**
+     * @param RequestInterface $request
+     * @param JsonFactory $jsonFactory
+     * @param SessionFactory $customerSessionFactory
+     * @param ProductRecommendation $productRecommendation
+     */
     public function __construct(
         private RequestInterface $request,
         private JsonFactory $jsonFactory,

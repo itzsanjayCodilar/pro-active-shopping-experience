@@ -6,6 +6,11 @@ use Magento\Eav\Model\Entity\Attribute\Source\AbstractSource;
 
 class GenderSource extends AbstractSource
 {
+    /**
+     * Get all options method
+     *
+     * @return array|array[]|null
+     */
     public function getAllOptions()
     {
         if (!$this->_options) {
