@@ -11,23 +11,28 @@ use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Exception\NotFoundException;
 use Magento\Store\Model\StoreManagerInterface;
+use Codilar\ProShopping\Model\Configuration;
 
 /**
  * Get product by category id
  */
 class ProductListByCategory implements HttpPostActionInterface
 {
+    private const PRODUCT_LIMIT = "pro_core/pro_core_config/product_limit";
+
     /**
      * @param RequestInterface $request
      * @param JsonFactory $jsonFactory
      * @param CollectionFactory $collectionFactory
      * @param StoreManagerInterface $storeManager
+     * @param Configuration $configuration
      */
     public function __construct(
         private RequestInterface $request,
         private JsonFactory $jsonFactory,
         private CollectionFactory $collectionFactory,
-        private StoreManagerInterface $storeManager
+        private StoreManagerInterface $storeManager,
+        private Configuration $configuration
     ) {
     }
 
@@ -48,10 +53,12 @@ class ProductListByCategory implements HttpPostActionInterface
 
         $id = $this->request->getParam('categoryId');
         $budgetValue = $this->request->getParam('budget');
+        $productLimit = (int)$this->configuration->getConfigValue(self::PRODUCT_LIMIT);
         $productCollection = $this->collectionFactory->create();
         $productCollection->addAttributeToSelect('*');
         $productCollection->addCategoriesFilter(['eq' => $id]);
         $productCollection->addAttributeToFilter('price', ['lt' => $budgetValue]);
+        $productCollection->getSelect()->limit($productLimit);
         $products = $productCollection->getItems();
         $productArr = [];
         foreach ($products as $product) {
