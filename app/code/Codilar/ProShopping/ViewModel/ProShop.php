@@ -16,6 +16,10 @@ class ProShop implements ArgumentInterface
      * category url
      */
     private const CATEGORY_URL = "pro_shopping/Recommend/GetCategories";
+    /**
+     * get products by category id
+     */
+    private const GET_PRODUCT_BY_CATEGORY_URL = "pro_shopping/Recommend/ProductListByCategory";
 
     /**
      * @var SearchCriteriaBuilder
@@ -79,36 +83,9 @@ class ProShop implements ArgumentInterface
      *
      * @return string
      */
-    public function getProductCategoryUrl()
+    public function getProductByCategoryUrl(): string
     {
-        return "pro_shopping/Recommend/ProductListByCategory";
-    }
-
-    /**
-     * Get recommended product
-     *
-     * @return array
-     */
-    public function getRecommendedProduct()
-    {
-        $collection = $this->productRepository->create();
-        $collection->addAttributeToSelect(['name', 'price', 'image']); // Select only Name, Price, and Image attributes
-        $products = $collection->setPageSize(3); // Fetching only 3 products
-
-        $data = [];
-        foreach ($products as $product) {
-            $name = $product->getName(); // Get Name attribute
-            $price = $product->getPrice();
-            $image = $product->getImage();
-
-            // Add product data to the $data array
-            $data[] = [
-                'name' => $name,
-                'price' => $price,
-                'image' => $image
-            ];
-        }
-        return $data;
+        return self::GET_PRODUCT_BY_CATEGORY_URL;
     }
 
     /**
