@@ -9,6 +9,9 @@ use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\ResponseInterface;
 use Magento\Framework\Controller\Result\JsonFactory;
 
+/**
+ * Get category
+ */
 class GetCategories implements HttpPostActionInterface
 {
     /**
@@ -22,7 +25,6 @@ class GetCategories implements HttpPostActionInterface
         private SearchCriteriaBuilder $searchCriteriaBuilder,
         private JsonFactory $jsonFactory,
         private FilterBuilder $filterBuilder
-
     ) {
     }
 
@@ -34,6 +36,7 @@ class GetCategories implements HttpPostActionInterface
     public function execute()
     {
         $categories = [];
+        //1, 2 is the default and root category
         $filter = $this->filterBuilder->setField("entity_id")
             ->setValue([1,2])
             ->setConditionType("nin")->create();

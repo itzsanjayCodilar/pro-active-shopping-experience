@@ -3,11 +3,9 @@
 
     /** @var \Codilar\ProShopping\ViewModel\ProShop $viewModel */
     $viewModel = $block->getData('viewModel');
-    $products = $viewModel->getRecommendedProduct();
 
     if ($this->isPopupEnabled() && $this->isContactEnabled()) {
         ?>
-
 
 <script type="text/javascript">
     require(['jquery', // jquery Library
@@ -96,12 +94,6 @@
     </div>
     <!-- New div to display products -->
     <div id="product-container"></div>
-    <div id="specification-section" style="display: none;">
-        <h2>Specifications</h2>
-        <div id="ram"></div>
-        <div id="storage"></div>
-        <div id="battery"></div>
-    </div>
 
 </div>
 </div>
