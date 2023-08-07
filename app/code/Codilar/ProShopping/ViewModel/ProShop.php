@@ -3,15 +3,14 @@
 namespace Codilar\ProShopping\ViewModel;
 
 use Codilar\ProShopping\Model\Configuration;
-use Exception;
-use Magento\Catalog\Api\CategoryListInterface;
-use Magento\Catalog\Api\Data\CategorySearchResultsInterface;
-use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
-use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 
 class ProShop implements ArgumentInterface
 {
+    /**
+     * Pro shopping ui position
+     */
+    private const POP_POSITION = "pro_popup/popup_display/popup_view";
     /**
      * category url
      */
@@ -20,62 +19,22 @@ class ProShop implements ArgumentInterface
      * get products by category id
      */
     private const GET_PRODUCT_BY_CATEGORY_URL = "pro_shopping/Recommend/ProductListByCategory";
-
     /**
-     * @var SearchCriteriaBuilder
+     * welcome message
      */
-    private SearchCriteriaBuilder $searchCriteriaBuilder;
+    private const WELCOME_MESSAGE = "pro_popup/welcome_message_group/message";
 
     /**
-     * @var CategoryListInterface
+     * Welcome action message
      */
-    private CategoryListInterface $categoryList;
+    private const WELCOME_ACTION_MESSAGE = "pro_popup/welcome_message_group/confirm_message";
 
     /**
-     * @var CollectionFactory
-     */
-    private CollectionFactory $productRepository;
-
-    /**
-     * @var Configuration
-     */
-    private Configuration $configuration;
-
-    /**
-     * @param CategoryListInterface $categoryList
-     * @param SearchCriteriaBuilder $searchCriteriaBuilder
-     * @param CollectionFactory $productRepository
      * @param Configuration $configuration
      */
     public function __construct(
-        CategoryListInterface $categoryList,
-        SearchCriteriaBuilder $searchCriteriaBuilder,
-        CollectionFactory $productRepository,
-        Configuration $configuration
+        private Configuration $configuration
     ) {
-        $this->categoryList = $categoryList;
-        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
-        $this->productRepository = $productRepository;
-        $this->configuration = $configuration;
-    }
-
-    /**
-     * Fetch all Category list
-     *
-     * @return CategorySearchResultsInterface
-     * @throws Exception
-     */
-    public function getAllSystemCategory()
-    {
-        $categoryList = [];
-        try {
-            $searchCriteria = $this->searchCriteriaBuilder->create();
-            $categoryList = $this->categoryList->getList($searchCriteria);
-        } catch (Exception $exception) {
-            throw new Exception($exception->getMessage());
-        }
-
-        return $categoryList;
     }
 
     /**
@@ -89,43 +48,23 @@ class ProShop implements ArgumentInterface
     }
 
     /**
-     * get initial product refer url
-     *
-     * @return string
-     */
-    public function initialProductReferUrl()
-    {
-        return "pro_shopping/Recommend/PromotionProducts";
-    }
-
-    /**
      * Get Welcome Message
      *
      * @return string
      */
     public function getWelcomeMessage(): string
     {
-        return $this->configuration->getWelcomeMessage();
+        return $this->configuration->getConfigValue(self::WELCOME_MESSAGE);
     }
 
     /**
-     * Get Welcome Message
+     * Get Action Welcome Message
      *
      * @return string
      */
-    public function getConfirmMessage(): string
+    public function getActionWelcomeMessage(): string
     {
-        return $this->configuration->getConfirmationMessage();
-    }
-
-    /**
-     * Get Welcome Message Enabled
-     *
-     * @return bool
-     */
-    public function getWelcomeMessageEnabled(): bool
-    {
-        return $this->configuration->getWelcomeMessageEnabled();
+        return $this->configuration->getConfigValue(self::WELCOME_ACTION_MESSAGE);
     }
 
     /**
@@ -136,5 +75,30 @@ class ProShop implements ArgumentInterface
     public function getCategoryUrl(): string
     {
         return self::CATEGORY_URL;
+    }
+
+    /**
+     * Is Welcome message enable
+     *
+     * @return bool
+     */
+    public function isWelcomeMessage(): bool
+    {
+        return $this->configuration->isWelcomeMessageEnable();
+    }
+
+    public function isProActionUiEnabled()
+    {
+        return $this->configuration->isProActionUiEnabled();
+    }
+
+    /**
+     * Get Pop up position
+     *
+     * @return mixed|null
+     */
+    public function getPopUpPosition()
+    {
+        return $this->configuration->getConfigValue(self::POP_POSITION);
     }
 }

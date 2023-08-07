@@ -12,14 +12,12 @@ use Magento\Store\Model\StoreManagerInterface;
  */
 class Configuration
 {
-    const CP_CONTACT_ENABLE = 'proshopping/active_display/enabled_proshopping';
-    const CP_PAGE_LINK = 'proshopping/active_display/contact_link';
-    const PP_POPUP_ENABLE = 'proshopping/popup_display/enabled_popup';
-    const PP_POPUP_POSITION = 'proshopping/popup_display/popup_view';
+    const POPUP_POSITION = 'pro_popup/popup_display/popup_view';
 
     private const INITIAL_LOGIN_SKUS = "pro_core/pro_login_customer/initial_product_sku_login";
     private const INITIAL_GUEST_SKUS = "pro_core/pro_guest_customer/initial_product_sku_guest";
-    private const IS_PRO_SHOPPING_ENABLE = "pro_core/pro_core_config/is_pro_enable";
+    private const IS_PRO_UI_ENABLE = "pro_popup/popup_display/enabled_popup";
+    private const IS_WELCOME_MESSAGE_ENABLE = "pro_popup/welcome_message_group/welcome_message_enabled";
 
     /**
      * @param ScopeConfigInterface $scopeConfig
@@ -32,77 +30,8 @@ class Configuration
     }
 
     /**
-     * Get front name
-     *
-     * @return mixed|string
-     */
-    public function getFrontName()
-    {
-        if ($this->isShoppingEnabled()) {
-            if ($this->pagelink()=='') {
-                return 'proshopping/front/index';
-            } else {
-                return $this->pagelink();
-            }
-        } else {
-            return 'contact';
-        }
-    }
-
-    /**
-     * Is shopping enabled
-     *
-     * @return mixed
-     */
-    public function isShoppingEnabled()
-    {
-        return $this->scopeConfig->getValue(
-            self::CP_CONTACT_ENABLE,
-            ScopeInterface::SCOPE_STORE
-        );
-    }
-
-    /**
-     * Page link method
-     *
-     * @return mixed
-     */
-    public function pagelink()
-    {
-        return $this->scopeConfig->getValue(
-            self::CP_PAGE_LINK,
-            ScopeInterface::SCOPE_STORE
-        );
-    }
-
-    /**
-     * Is pop up enabled
-     *
-     * @return mixed
-     */
-    public function isPopupEnabled()
-    {
-        return $this->scopeConfig->getValue(
-            self::PP_POPUP_ENABLE,
-            ScopeInterface::SCOPE_STORE
-        );
-    }
-
-    /**
-     * Get the popup position
-     *
-     * @return mixed
-     */
-    public function popupposition()
-    {
-        return $this->scopeConfig->getValue(
-            self::PP_POPUP_POSITION,
-            ScopeInterface::SCOPE_STORE
-        );
-    }
-
-    /**
      * Get the initial skus
+     * future code
      *
      * @param $isGuest
      * @param $store
@@ -130,24 +59,6 @@ class Configuration
     }
 
     /**
-     * Is pro shopping enable
-     *
-     * @param $store
-     * @return bool
-     */
-    public function isProShoppingEnable($store = null)
-    {
-        if (empty($store)) {
-            try {
-                $store = $this->storeManager->getStore()?->getId();
-            } catch (NoSuchEntityException $e) {
-                return false;
-            }
-        }
-        return $this->scopeConfig->isSetFlag(self::IS_PRO_SHOPPING_ENABLE, ScopeInterface::SCOPE_STORE, $store);
-    }
-
-    /**
      * Get the configuration value
      *
      * @param $configPath
@@ -160,48 +71,53 @@ class Configuration
             try {
                 $store = $this->storeManager->getStore()?->getId();
             } catch (NoSuchEntityException $e) {
-                $store = null;
+                $store = 0;
             }
         }
         return $this->scopeConfig->getValue($configPath, ScopeInterface::SCOPE_STORE, $store);
     }
 
     /**
-     * Get Welcome Message
+     * is pro action ui enable
      *
-     * @return mixed
+     * @param $store
+     * @return bool
      */
-    public function getWelcomeMessage(): mixed
+    public function isProActionUiEnabled($store = null): bool
     {
-        return $this->scopeConfig->getValue(
-            'welcome_message/welcome_message_group/message',
-            ScopeInterface::SCOPE_STORE
+        if (empty($store)) {
+            try {
+                $store = $this->storeManager->getStore()?->getId();
+            } catch (NoSuchEntityException $e) {
+                $store = 0;
+            }
+        }
+        return $this->scopeConfig->isSetFlag(
+            self::IS_PRO_UI_ENABLE,
+            ScopeInterface::SCOPE_STORE,
+            $store
         );
     }
 
     /**
-     * Get Welcome Message Enabled
+     * is welcome enable
      *
-     * @return mixed
+     * @param $store
+     * @return bool
      */
-    public function getWelcomeMessageEnabled(): mixed
+    public function isWelcomeMessageEnable($store = null): bool
     {
-        return $this->scopeConfig->getValue(
-            'welcome_message/welcome_message_group/welcome_message_enabled',
-            ScopeInterface::SCOPE_STORE
-        );
-    }
-
-    /**
-     * Get Welcome Message
-     *
-     * @return mixed
-     */
-    public function getConfirmationMessage(): mixed
-    {
-        return $this->scopeConfig->getValue(
-            'welcome_message/welcome_message_group/confirm_message',
-            ScopeInterface::SCOPE_STORE
+        if (empty($store)) {
+            try {
+                $store = $this->storeManager->getStore()?->getId();
+            } catch (NoSuchEntityException $e) {
+                $store = 0;
+            }
+        }
+        return $this->scopeConfig->isSetFlag(
+            self::IS_WELCOME_MESSAGE_ENABLE,
+            ScopeInterface::SCOPE_STORE,
+            $store
         );
     }
 }

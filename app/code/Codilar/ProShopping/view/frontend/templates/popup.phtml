@@ -4,7 +4,7 @@
     /** @var \Codilar\ProShopping\ViewModel\ProShop $viewModel */
     $viewModel = $block->getData('viewModel');
 
-    if ($this->isPopupEnabled() && $this->isContactEnabled()) {
+    if ($viewModel->isProActionUiEnabled()) {
         ?>
 
 <script type="text/javascript">
@@ -44,66 +44,47 @@
     });
 
     });
-    function myFunction() {
-        var exists = document.getElementById("g-recaptcha-response");
-
-    if(exists == null){
-            //alert('not exists');
-    }
-    else {
-        var check = document.getElementById("g-recaptcha-response").value;
-       // alert(check);
-        if(check=='' || check == null){
-            document.getElementById("recaptcha").style.border = "1px solid #ea0e0e";
-            return false;
-        }
-        else{
-            document.getElementById("recaptcha").style.border = "none";
-            return true;
-        }
-    }
-}
 
 </script>
 
-<div id="leftcontact" <?php if ($this->popupposition() == 0) {
+<div id="leftcontact" <?php if ($viewModel->getPopUpPosition() == 0) {
             echo "class=popup";
         } else {
             echo "class=popup-right";
         } ?>
      data-value="hide">
-<div id="bcontactForm" name="bMyform" class="block contactFormheader">
+    <div id="bcontactForm" name="bMyform" class="block contactFormheader">
 
-    <?php if ($viewModel->getWelcomeMessageEnabled()) { ?>
-        <p class="welcome-message"><?php echo $viewModel->getWelcomeMessage() ?></p>
-        <h3><?php echo $viewModel->getConfirmMessage() ?></h3>
-        <button class="yes confirm-button" id="yes">Purchase</button>
-        <button class="order-history confirm-button" onclick='document.getElementById("message").innerHTML = "Order History feature will be developed after winning this Hackathon!"'>Check Order History</button>
-        <h2 id="message"></h2>
-    <?php } ?>
+        <?php if ($viewModel->isWelcomeMessage()) { ?>
+            <p class="welcome-message"><?= $viewModel->getWelcomeMessage() ?></p>
+            <h3><?= $viewModel->getActionWelcomeMessage() ?></h3>
+            <button class="yes confirm-button" id="yes">Purchase</button>
+            <button class="order-history confirm-button" onclick='document.getElementById("message").innerHTML = "Order History feature will be developed after winning this Hackathon!"'>Check Order History</button>
+            <h2 id="message"></h2>
+        <?php } ?>
 
-    <div class="category-container"></div>
-    <div id="budget-div" style="display: none;">
-        <label for="budget">What is your budget?</label>
-        <div>
-            <button class="budget-button" data-budget="5000">0-5k</button>
-            <button class="budget-button" data-budget="10000">5k-10k</button>
-            <button class="budget-button" data-budget="20000">10k-20k</button>
-            <button class="budget-button" data-budget="80000">20k-More</button>
+        <div class="category-container"></div>
+        <div id="budget-div" style="display: none;">
+            <label for="budget">What is your budget?</label>
+            <div>
+                <button class="budget-button" data-budget="5000">0-5k</button>
+                <button class="budget-button" data-budget="10000">5k-10k</button>
+                <button class="budget-button" data-budget="20000">10k-20k</button>
+                <button class="budget-button" data-budget="80000">20k-More</button>
+            </div>
         </div>
+        <!-- New div to display products -->
+        <div id="product-container"></div>
+
     </div>
-    <!-- New div to display products -->
-    <div id="product-container"></div>
-
-</div>
 </div>
 
-<div <?php if ($this->popupposition() == 0) {
+<div <?php if ($viewModel->getPopUpPosition() == 0) {
             echo "class=share_box";
         } else {
             echo "class=share_box-right";
         } ?>
-    <?php if ($this->popupposition() == 0) {
+    <?php if ($viewModel->getPopUpPosition()== 0) {
             echo "id=pop_button";
         } else {
             echo "id=pop_button-right";
