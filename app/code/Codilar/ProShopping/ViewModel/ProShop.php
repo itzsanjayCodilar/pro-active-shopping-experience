@@ -2,16 +2,21 @@
 
 namespace Codilar\ProShopping\ViewModel;
 
+use Codilar\ProShopping\Model\Configuration;
 use Exception;
 use Magento\Catalog\Api\CategoryListInterface;
 use Magento\Catalog\Api\Data\CategorySearchResultsInterface;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\View\Element\Block\ArgumentInterface;
-use Codilar\ProShopping\Model\Configuration;
 
 class ProShop implements ArgumentInterface
 {
+    /**
+     * category url
+     */
+    private const CATEGORY_URL = "pro_shopping/Recommend/GetCategories";
+
     /**
      * @var SearchCriteriaBuilder
      */
@@ -151,8 +156,8 @@ class ProShop implements ArgumentInterface
      *
      * @return string
      */
-    public function getCategoryUrl()
+    public function getCategoryUrl(): string
     {
-        return "pro_shopping/Recommend/GetCategories";
+        return self::CATEGORY_URL;
     }
 }
