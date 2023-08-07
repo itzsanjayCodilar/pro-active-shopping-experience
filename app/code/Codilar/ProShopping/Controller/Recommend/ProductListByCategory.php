@@ -39,13 +39,6 @@ class ProductListByCategory implements HttpPostActionInterface
      */
     public function execute()
     {
-        try {
-            $baseUrl = $this->storeManager->getStore()?->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA)
-                . 'catalog/product';
-        } catch (NoSuchEntityException $e) {
-            $baseUrl = null;
-        }
-
         $id = $this->request->getParam('categoryId');
         $budgetValue = $this->request->getParam('budget');
         $productCollection = $this->collectionFactory->create();
@@ -54,14 +47,23 @@ class ProductListByCategory implements HttpPostActionInterface
         $productCollection->addAttributeToFilter('price', ['lt' => $budgetValue]);
         $products = $productCollection->getItems();
         $productArr = [];
-        foreach ($products as $product) {
-            $productArr[] = [
-                'id' => $product->getId(),
-                "sku" => $product->getSku(),
-                "image" => $baseUrl . $product->getImage(),
-                "price" => $product->getPrice()
-            ];
+        if ($productCollection->count() > 0) {
+            try {
+                $baseUrl = $this->storeManager->getStore()?->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA)
+                    . 'catalog/product';
+            } catch (NoSuchEntityException $e) {
+                $baseUrl = null;
+            }
+            foreach ($products as $product) {
+                $productArr[] = [
+                    'id' => $product->getId(),
+                    "sku" => $product->getSku(),
+                    "image" => $baseUrl . $product->getImage(),
+                    "price" => $product->getPrice()
+                ];
+            }
         }
+
         $jsonResult = json_encode($productArr);
         $result = $this->jsonFactory->create();
         $result->setData(['output' => $jsonResult]);

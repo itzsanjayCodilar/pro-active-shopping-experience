@@ -153,9 +153,9 @@
 
                         // Continue with the AJAX request and display products
                         let products;
-                        let url = "<?= $viewModel->getProductCategoryUrl() ?>";
+                        let categoryProductUrl = "<?= $viewModel->getProductByCategoryUrl() ?>";
                         $.ajax({
-                            url: url,
+                            url: categoryProductUrl,
                             type: 'POST',
                             dataType: 'json',
                             data: { categoryId: categoryId, budget: budget },
@@ -163,7 +163,6 @@
                                 products = JSON.parse(response.output);
                                 // Call function to display products in the new div
                                 displayProducts(products);
-                                // Show the specification section
                             },
                             error: function (err) {
                                 console.log(err.Message);
