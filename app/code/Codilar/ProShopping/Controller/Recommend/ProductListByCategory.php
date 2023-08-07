@@ -17,7 +17,12 @@ use Magento\Store\Model\StoreManagerInterface;
  */
 class ProductListByCategory implements HttpPostActionInterface
 {
-
+    /**
+     * @param RequestInterface $request
+     * @param JsonFactory $jsonFactory
+     * @param CollectionFactory $collectionFactory
+     * @param StoreManagerInterface $storeManager
+     */
     public function __construct(
         private RequestInterface $request,
         private JsonFactory $jsonFactory,

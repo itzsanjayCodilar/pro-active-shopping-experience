@@ -23,6 +23,7 @@ class Configuration
 
     /**
      * @param ScopeConfigInterface $scopeConfig
+     * @param StoreManagerInterface $storeManager
      */
     public function __construct(
         private ScopeConfigInterface $scopeConfig,
@@ -30,6 +31,11 @@ class Configuration
     ) {
     }
 
+    /**
+     * Get front name
+     *
+     * @return mixed|string
+     */
     public function getFrontName()
     {
         if ($this->isShoppingEnabled()) {
@@ -42,6 +48,12 @@ class Configuration
             return 'contact';
         }
     }
+
+    /**
+     * Is shopping enabled
+     *
+     * @return mixed
+     */
     public function isShoppingEnabled()
     {
         return $this->scopeConfig->getValue(
@@ -49,6 +61,12 @@ class Configuration
             ScopeInterface::SCOPE_STORE
         );
     }
+
+    /**
+     * Page link method
+     *
+     * @return mixed
+     */
     public function pagelink()
     {
         return $this->scopeConfig->getValue(
@@ -57,6 +75,11 @@ class Configuration
         );
     }
 
+    /**
+     * Is pop up enabled
+     *
+     * @return mixed
+     */
     public function isPopupEnabled()
     {
         return $this->scopeConfig->getValue(
@@ -65,6 +88,11 @@ class Configuration
         );
     }
 
+    /**
+     * Get the popup position
+     *
+     * @return mixed
+     */
     public function popupposition()
     {
         return $this->scopeConfig->getValue(

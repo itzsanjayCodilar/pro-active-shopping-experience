@@ -32,6 +32,12 @@ class ProShop implements ArgumentInterface
      */
     private Configuration $configuration;
 
+    /**
+     * @param CategoryListInterface $categoryList
+     * @param SearchCriteriaBuilder $searchCriteriaBuilder
+     * @param CollectionFactory $productRepository
+     * @param Configuration $configuration
+     */
     public function __construct(
         CategoryListInterface $categoryList,
         SearchCriteriaBuilder $searchCriteriaBuilder,
@@ -48,6 +54,7 @@ class ProShop implements ArgumentInterface
      * Fetch all Category list
      *
      * @return CategorySearchResultsInterface
+     * @throws Exception
      */
     public function getAllSystemCategory()
     {
@@ -62,11 +69,21 @@ class ProShop implements ArgumentInterface
         return $categoryList;
     }
 
+    /**
+     * Get product category url
+     *
+     * @return string
+     */
     public function getProductCategoryUrl()
     {
         return "pro_shopping/Recommend/ProductListByCategory";
     }
 
+    /**
+     * Get recommended product
+     *
+     * @return array
+     */
     public function getRecommendedProduct()
     {
         $collection = $this->productRepository->create();
@@ -129,6 +146,11 @@ class ProShop implements ArgumentInterface
         return $this->configuration->getWelcomeMessageEnabled();
     }
 
+    /**
+     * Get Category url
+     *
+     * @return string
+     */
     public function getCategoryUrl()
     {
         return "pro_shopping/Recommend/GetCategories";
