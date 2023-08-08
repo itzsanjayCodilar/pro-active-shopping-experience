@@ -1,5 +1,5 @@
 # pro-active-shopping-experience
-codilar hackathon
+codilar hackathon  - development repo
 
 
 Team Name - 
