@@ -7,19 +7,21 @@
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
-        <proshopping>
-            <active_display>
-            	<enabled_proshopping>1</enabled_proshopping>
-            </active_display>
+        <pro_core>
+            <pro_core_config>
+                <is_pro_enable>1</is_pro_enable>
+                <product_limit>10</product_limit>
+            </pro_core_config>
+        </pro_core>
+        <pro_popup>
             <popup_display>
-            	<enabled_popup>1</enabled_popup>
-            	<popup_view>0</popup_view>
+                <enabled_popup>1</enabled_popup>
             </popup_display>
             <welcome_message_group>
                 <welcome_message_enabled>1</welcome_message_enabled>
-                <message>Welcome to Store</message>
-                <confirm_message>What would you like to buy?</confirm_message>
+                <message>Hello</message>
+                <confirm_message>What would you will like to do?</confirm_message>
             </welcome_message_group>
-        </proshopping>
+        </pro_popup>
     </default>
 </config>
